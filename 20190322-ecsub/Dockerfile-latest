@@ -1,0 +1,12 @@
+FROM python:2.7.14
+MAINTAINER aokada <aokada@ncc.go.jp>
+
+# RUN: build
+RUN apt-get -y update && \
+    apt-get install -y git &&\
+    \
+    git clone https://github.com/aokad/ecsub.git && \
+    cd ecsub && \
+    python setup.py build install
+
+CMD ["/bin/bash"]

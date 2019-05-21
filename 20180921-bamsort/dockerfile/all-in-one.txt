@@ -1,0 +1,12 @@
+FROM aokad/challenge-seeds:bamsort-20180831-all-in-one.prep2
+MAINTAINER aokad <aokada@ncc.go.jp>
+
+RUN wget -nc https://github.com/gt1/biobambam2/archive/2.0.87-release-20180301132713.tar.gz && \
+    tar xzvf 2.0.87-release-20180301132713.tar.gz && \
+    rm -f 2.0.87-release-20180301132713.tar.gz && \
+    cd biobambam2-2.0.87-release-20180301132713 && \
+    autoreconf -i -f && \
+    ./configure --prefix=/tools/biobambam2 && \
+    make install
+
+CMD ["/bin/bash"]

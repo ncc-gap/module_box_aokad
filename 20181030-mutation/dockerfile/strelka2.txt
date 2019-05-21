@@ -1,0 +1,15 @@
+FROM debian:8.11
+MAINTAINER aokad <aokada@ncc.go.jp>
+
+RUN apt update -qq && \
+    apt install -qq bzip2 gcc g++ make python zlib1g-dev wget && \
+    apt-get clean autoclean && \
+    apt-get autoremove -y 
+
+RUN mkdir /tools
+WORKDIR /tools
+
+RUN wget https://github.com/Illumina/strelka/releases/download/v2.9.2/strelka-2.9.2.centos6_x86_64.tar.bz2 && \
+    tar xvjf strelka-2.9.2.centos6_x86_64.tar.bz2
+
+CMD ["/bin/bash"]

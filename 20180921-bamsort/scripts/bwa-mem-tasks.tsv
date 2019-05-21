@@ -1,0 +1,2 @@
+--env BWA_OPTION	--input-recursive REFERENCE	--input FASTQ1	--input FASTQ2	--output OUTPUT_SAM
+-t 8 -T 0	s3://genomon-bucket/_GRCh37/reference/GRCh37	s3://genomon-bucket/sample/exome/5929_tumor/sequence1.fastq	s3://genomon-bucket/sample/exome/5929_tumor/sequence2.fastq	s3://aokad-ana-bucket/challenge/bamsort-20180831/bam/5929_tumor.sam

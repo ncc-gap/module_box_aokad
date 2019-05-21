@@ -1,0 +1,12 @@
+--env SAMPLE    --input INPUT_FQ        --output-recursive OUTPUT_DIR   --input REFERENCE
+MinION_A549     s3://friend1ws-tokyo/tmp_ONT_WGS/MinION_A549.fq.gz      s3://friend1ws-tokyo/minimap2_out
+       s3://friend1ws-tokyo/minimap2_resource/GRCh37.mmi
+MinION_LC2ad    s3://friend1ws-tokyo/tmp_ONT_WGS/MinION_LC2ad.fq.gz     s3://friend1ws-tokyo/minimap2_out
+       s3://friend1ws-tokyo/minimap2_resource/GRCh37.mmi
+PromethION_ABC-1        s3://friend1ws-tokyo/tmp_ONT_WGS/PromethION_ABC-1.fq.gz s3://friend1ws-tokyo/minimap2_out       s3://friend1ws-tokyo/minimap2_resource/GRCh37.mmi
+PromethION_LC2ad        s3://friend1ws-tokyo/tmp_ONT_WGS/PromethION_LC2ad.fq.gz s3://friend1ws-tokyo/minimap2_out       s3://friend1ws-tokyo/minimap2_resource/GRCh37.mmi
+PromethION_PC-14        s3://friend1ws-tokyo/tmp_ONT_WGS/PromethION_PC-14.fq.gz s3://friend1ws-tokyo/minimap2_out       s3://friend1ws-tokyo/minimap2_resource/GRCh37.mmi
+PromethION_RERF-LC-KJ   s3://friend1ws-tokyo/tmp_ONT_WGS/PromethION_RERF-LC-KJ.fq.gz    s3://friend1ws-tokyo/minimap2_out       s3://friend1ws-tokyo/minimap2_resource/GRCh37.mmi
+PromethION_RERF-LC-MS   s3://friend1ws-tokyo/tmp_ONT_WGS/PromethION_RERF-LC-MS.fq.gz    s3://friend1ws-tokyo/minimap2_out       s3://friend1ws-tokyo/minimap2_resource/GRCh37.mmi
+BL2009  s3://friend1ws-tokyo/1217_promethion_long/BL2009.fq.gz  s3://friend1ws-tokyo/minimap2_out       s3://friend1ws-tokyo/minimap2_resource/GRCh37.mmi
+H2009   s3://friend1ws-tokyo/1217_promethion_long/H2009.fq.gz   s3://friend1ws-tokyo/minimap2_out       s3://friend1ws-tokyo/minimap2_resource/GRCh37.mmi

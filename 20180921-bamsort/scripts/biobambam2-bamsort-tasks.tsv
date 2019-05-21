@@ -1,0 +1,2 @@
+--env BIOBAMBAM_PREFIX	--env BAMSORT_OPTION	--input-recursive REFERENCE	--input INPUT_SAM	--output-recursive OUTPUT_DIR	--env OUTPUT_NAME
+/usr/local/bin	index=1 level=1 inputthreads=2 outputthreads=2 calmdnm=1 calmdnmrecompindentonly=1	s3://genomon-bucket/_GRCh37/reference/GRCh37	s3://aokad-ana-bucket/challenge/bamsort-20180831/bam/5929_tumor.sam	s3://aokad-ana-bucket/challenge/bamsort-20180831/biobambam2-2.0.87/	5929_tumor.sorted.bam

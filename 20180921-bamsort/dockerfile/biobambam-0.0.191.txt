@@ -1,0 +1,35 @@
+FROM debian:8.11
+MAINTAINER aokad <aokada@ncc.go.jp>
+
+# Install ant, git for building
+RUN apt-get update && \
+    apt-get --no-install-recommends install -y --force-yes python2.7 python-pip \
+    wget ssl-cert ca-certificates \
+    tar bzip2 \
+    make g++ autoconf automake libtool pkg-config zlib1g-dev && \
+    apt-get clean autoclean && \
+    apt-get autoremove -y 
+
+RUN mkdir /tools
+WORKDIR /tools
+
+RUN wget -nc https://github.com/gt1/libmaus/archive/0.0.196-release-20150326095654.tar.gz && \
+    tar xzvf 0.0.196-release-20150326095654.tar.gz && \
+    rm -f 0.0.196-release-20150326095654.tar.gz && \
+    cd /tools/libmaus-0.0.196-release-20150326095654 && \
+    autoreconf -i -f && \
+    ./configure && \
+    make && \
+    make install
+
+RUN wget -nc https://github.com/gt1/biobambam/archive/0.0.191-release-20150401083643.tar.gz && \
+    tar xzvf 0.0.191-release-20150401083643.tar.gz && \
+    rm -f 0.0.191-release-20150401083643.tar.gz && \
+    cd biobambam-0.0.191-release-20150401083643 && \
+    autoreconf -i -f && \
+    ./configure && \
+    make && \
+    make install 
+
+CMD ["/bin/bash"]
+

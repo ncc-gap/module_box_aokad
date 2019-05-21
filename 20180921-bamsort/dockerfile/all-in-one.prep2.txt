@@ -1,0 +1,11 @@
+FROM aokad/challenge-seeds:bamsort-20180831-all-in-one.prep1
+MAINTAINER aokad <aokada@ncc.go.jp>
+
+RUN wget -nc https://github.com/gt1/libmaus2/archive/2.0.499-release-20180606122508.tar.gz && \
+    tar xzvf 2.0.499-release-20180606122508.tar.gz && \
+    rm -f 2.0.499-release-20180606122508.tar.gz && \
+    cd libmaus2-2.0.499-release-20180606122508 && \
+    ./configure && \
+    make install
+
+CMD ["/bin/bash"]

@@ -1,0 +1,2 @@
+--input INPUT_SAM	--output-recursive OUTPUT_DIR	--env OUTPUT_NAME
+s3://aokad-ana-bucket/challenge/bamsort-20180831/bam/5929_tumor.sam	s3://aokad-ana-bucket/challenge/bamsort-20180831/samtools-1.9	5929_tumor.sorted
