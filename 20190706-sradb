@@ -1,0 +1,10 @@
+FROM r-base:3.6.1
+MAINTAINER aokad <aokada@ncc.go.jp>
+
+RUN apt-get -y update && \
+    apt-get install -y git && \
+    Rscript -e "install.packages('BiocManager')" && \
+    Rscript -e "BiocManager::install("SRAdb", ask=FALSE)" && \
+    git https://github.com/friend1ws/SF3B1_project.git
+    
+CMD ["/bin/bash"]
