@@ -1,0 +1,7 @@
+FROM python:2.7.16
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+RUN apt-get update && \
+    apt-get install -y librsvg2-bin && \
+    pip install svviz
