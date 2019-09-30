@@ -3,9 +3,6 @@ FROM aokad/star:2.7.1a
 
 MAINTAINER Ai Okada <aokada@ncc.go.jp>
 
-RUN apt-get -y update && \
-    apt-get install -y wget dpkg-dev gcc g++ libc6-dev make patch tar unzip zlib1g-dev libbz2-dev liblzma-dev autoconf autotools-dev libtool pkg-config
-
 ##########
 ## STAR
 
