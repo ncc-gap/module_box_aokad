@@ -1,9 +1,9 @@
 set -x
 
-export INPUT_BAM=/external/DRP000987/DRR006374/DRR006374.Aligned.sortedByCoord.out.bam
-export REFERENCE=/external/GRCh37/GRCh37.fa
-export OUTPUT_DIR=/external
-export SAMPLE=DRR006374
+#export INPUT_BAM=/external/DRP000987/DRR006374/DRR006374.Aligned.sortedByCoord.out.bam
+#export REFERENCE=/external/GRCh37/GRCh37.fa
+#export OUTPUT_DIR=/external
+#export SAMPLE=DRR006374
 
 export OUTPUT_PREFIX=${OUTPUT_DIR}/${SAMPLE}
 
