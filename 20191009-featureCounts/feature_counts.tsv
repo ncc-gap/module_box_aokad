@@ -1,0 +1,2 @@
+--env SAMPLE	--input INPUT	--output-recursive OUTPUT_DIR	--input GTF
+DRR016694	s3://sra-virginia/sandbox/genomon-GRCh38.d1.v1/DRP001919/DRR016694/star/DRR016694.Aligned.sortedByCoord.out.bam	s3://sra-virginia/sandbox/feature_count/DRP001919/DRR016694	s3://genomon-bucket-virginia/_GRCh38/reference/gtf/gencode.v31.annotation.gtf

@@ -1,0 +1,7 @@
+{
+    "script": "s3://iret-ecsub-virginia/tasks/feature_count/script.sh",
+    "image": "aokad/feature_counts:latest",
+    "aws_ec2_instance_type_list": "t3.large,t3a.large",
+    "disk_size": 50,
+    "spot": true
+}
