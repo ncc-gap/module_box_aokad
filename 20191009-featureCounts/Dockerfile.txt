@@ -12,6 +12,6 @@ RUN wget https://sourceforge.net/projects/subread/files/subread-1.5.2/subread-1.
 
 RUN wget --trust-server-names "https://sourceforge.net/projects/subread/files/subread-1.5.2/subread-1.5.2-Linux-x86_64.tar.gz" && \
     tar -zxvf subread-1.5.2-Linux-x86_64.tar.gz && \
-    cp subread-1.5.2-Linux-x86_64/bin/* /usr/local/bin/
+    cp -r subread-1.5.2-Linux-x86_64/bin/* /usr/local/bin/
 
 RUN git clone https://github.com/friend1ws/simple_exp.git
