@@ -3,7 +3,7 @@ FROM debian:9.11
 MAINTAINER Ai Okada <aokada@ncc.go.jp>
 
 RUN apt-get -y update && \
-    apt-get install -y wget gcc g++ make patch tar unzip bzip2 zlib1g-dev libbz2-dev liblzma-dev 
+    apt-get install -y wget gcc g++ make patch tar unzip bzip2 zlib1g-dev libbz2-dev liblzma-dev python-pip
 
 WORKDIR /tools
 
@@ -23,13 +23,10 @@ RUN wget https://github.com/alexdobin/STAR/archive/2.7.2b.tar.gz && \
     mv STAR-2.7.2b/bin/Linux_x86_64_static/STAR /usr/local/bin
 
 ##########
-## sequeeze
+## AWS CLI
 
-RUN wget https://github.com/aokad/sequeeze/archive/master.zip && \
-    unzip master.zip && \
-    cd sequeeze-master && \
-    make && make install
-
+RUN pip install awscli
+    
 ENV LD_LIBRARY_PATH /usr/local/lib:$LD_LIBRARY_PATH
 
 CMD ["/bin/bash"]
