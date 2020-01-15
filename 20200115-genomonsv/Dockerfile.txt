@@ -29,13 +29,18 @@ RUN wget https://github.com/samtools/htslib/releases/download/1.3/htslib-1.3.tar
     make && \
     make install
 
-RUN echo "build BLAT v.35" && \
-    wget http://hgdownload.soe.ucsc.edu/admin/exe/userApps.v359.src.tgz && \
+RUN wget http://hgdownload.soe.ucsc.edu/admin/exe/userApps.v359.src.tgz && \
     tar -xzvf userApps.v359.src.tgz && \
     rm -f userApps.v359.src.tgz && \
     cd userApps && \
     make && make install
 
+RUN wget https://github.com/Genomon-Project/GenomonSV/archive/v0.6.1b1.zip &&\
+    unzip v0.6.1b1.zip && \
+    rm -f v0.6.1b1.zip && \
+    cd GenomonSV-0.6.1b1 && \
+    python setup.py install
+    
 RUN pip install --upgrade pip && \
     pip install --upgrade setuptools && \
     pip install annot_utils==0.2.1 && \
