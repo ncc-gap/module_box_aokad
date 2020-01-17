@@ -88,6 +88,13 @@ RUN pip install pysam==0.9.1.4 && \
     cd GenomonHotspotCall-0.1.0 && \
     python setup.py install && \
     \
+    cd /tools && \
+    wget -nc https://github.com/Genomon-Project/EBFilter/archive/v0.2.1.zip && \
+    unzip v0.2.1.zip && \
+    rm -f v0.2.1.zip && \
+    cd EBFilter-0.2.1 && \
+    python setup.py install && \
+    \
     echo "export LD_LIBRARY_PATH=/usr/local/lib" >> /root/.bashrc
 
 CMD ["/bin/bash"]
