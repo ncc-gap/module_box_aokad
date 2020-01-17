@@ -32,8 +32,8 @@ RUN wget http://hgdownload.soe.ucsc.edu/admin/exe/userApps.v359.src.tgz && \
     tar -xzvf userApps.v359.src.tgz && \
     rm -f userApps.v359.src.tgz && \
     cd userApps && \
-    cd /tools/userApps && make
-
+    make && \
+    cp bin/blat /usr/local/bin/ 
 
 RUN wget https://github.com/Genomon-Project/GenomonSV/archive/v0.6.1b1.zip &&\
     unzip v0.6.1b1.zip && \
