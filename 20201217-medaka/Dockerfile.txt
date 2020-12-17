@@ -1,0 +1,11 @@
+FROM minimap2:latest
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+WORKDIR /tools
+
+RUN pip3 install --upgrade pip && \
+    pip3 install tensorflow==2.2.0 && \
+    pip3 install medaka
+
+CMD ["/bin/bash"]
