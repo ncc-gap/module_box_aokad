@@ -44,7 +44,8 @@ RUN wget https://github.com/lh3/minimap2/releases/download/v2.17/minimap2-2.17.t
 
 ##########
 # medaka
-RUN pip3 install tensorflow==2.2.0 && \
+RUN pip3 install --upgrade pip && \
+    pip3 install tensorflow==2.2.0 && \
     pip3 install medaka
     
 ENV LD_LIBRARY_PATH /usr/local/lib:$LD_LIBRARY_PATH
