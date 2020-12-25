@@ -4,6 +4,7 @@ MAINTAINER Ai Okada <aokada@ncc.go.jp>
 
 WORKDIR /tools
 
-RUN pip3 install medaka-cpu
+RUN pip3 install --upgrade pip && \
+    pip3 install medaka
 
 CMD ["/bin/bash"]
