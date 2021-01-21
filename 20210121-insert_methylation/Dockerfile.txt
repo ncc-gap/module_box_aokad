@@ -55,6 +55,7 @@ RUN git clone --recursive https://github.com/jts/nanopolish.git && \
 RUN wget http://ftp.debian.org/debian/pool/main/m/mafft/mafft_7.407-2_amd64.deb && \
     dpkg -i mafft_7.407-2_amd64.deb
     
+RUN apt-get install -y cmake
 RUN wget https://github.com/isovic/racon/releases/download/1.4.3/racon-v1.4.3.tar.gz && \
     tar zxvf racon-v1.4.3.tar.gz && \
     cd racon-v1.4.3 && mkdir build && cd build && \
