@@ -98,6 +98,7 @@ RUN apt-get update && apt-get -y install \
     openssl \
     perl \
     perl-base \
+    sqlite3 \
     unzip \
     vim && \
     apt-get -y purge manpages-dev && \
@@ -144,6 +145,7 @@ RUN ensembl-vep/travisci/build_c.sh && \
     # Install ensembl perl dependencies (cpanm)
     cpanm --installdeps --with-recommends --notest --cpanfile ensembl_cpanfile . && \
     cpanm --installdeps --with-recommends --notest --cpanfile ensembl-vep/cpanfile . && \
+    yes '' | cpan install -i DBD::SQLite && \
     # Delete bioperl and cpanfiles after the cpanm installs as bioperl will be reinstalled by the INSTALL.pl script
     rm -rf bioperl-live ensembl_cpanfile ensembl-vep/cpanfile && \
     # Configure "locale", see https://github.com/rocker-org/rocker/issues/19
