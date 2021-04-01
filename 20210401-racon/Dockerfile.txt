@@ -1,0 +1,22 @@
+FROM ubuntu:18.04
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+RUN apt-get update && apt-get install -y \
+    wget \
+    make \
+    cmake \
+    gcc \
+    g++
+
+WORKDIR /tools
+
+RUN wget https://github.com/isovic/racon/releases/download/1.4.3/racon-v1.4.3.tar.gz && \
+    tar -zxvf racon-v1.4.3.tar.gz && \
+    cd racon-v1.4.3 && \
+    mkdir build && \
+    cd build && \
+    cmake -DCMAKE_BUILD_TYPE=Release .. && \
+    make && make install
+
+CMD ["/bin/bash"]
