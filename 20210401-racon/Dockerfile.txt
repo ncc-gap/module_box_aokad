@@ -7,7 +7,12 @@ RUN apt-get update && apt-get install -y \
     make \
     cmake \
     gcc \
-    g++
+    g++ \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev
 
 WORKDIR /tools
 
@@ -18,5 +23,18 @@ RUN wget https://github.com/isovic/racon/releases/download/1.4.3/racon-v1.4.3.ta
     cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release .. && \
     make && make install
+    
+RUN wget https://github.com/samtools/samtools/releases/download/1.11/samtools-1.11.tar.bz2 && \
+    tar jxvf samtools-1.11.tar.bz2 && \
+    cd samtools-1.11/htslib-1.11 && ./configure && make && make install && \
+    cd ../ && ./configure --without-curses && make && make install
 
+RUN wget https://github.com/samtools/bcftools/releases/download/1.11/bcftools-1.11.tar.bz2 && \
+    tar jxvf bcftools-1.11.tar.bz2 && \
+    cd bcftools-1.11 && ./configure && make && make install
+
+RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.27.0/bedtools-2.27.0.tar.gz && \
+    tar -zxvf bedtools-2.27.0.tar.gz && \
+    cd bedtools2 && make && make install
+    
 CMD ["/bin/bash"]
