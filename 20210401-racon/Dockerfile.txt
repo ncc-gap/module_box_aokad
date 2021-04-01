@@ -44,6 +44,6 @@ RUN wget https://github.com/lh3/bwa/releases/download/v0.7.17/bwa-0.7.17.tar.bz2
     tar xjvf bwa-0.7.17.tar.bz2 && \
     rm -f bwa-0.7.17.tar.bz2 && \
     cd /tools/bwa-0.7.17 && \
-    make
+    make && make install
     
 CMD ["/bin/bash"]
