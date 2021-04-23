@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     unzip \
     make \
+    zlib1g-dev \
     gcc \
     g++
 
