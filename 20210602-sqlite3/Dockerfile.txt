@@ -1,7 +1,8 @@
 FROM python:3.8.10-buster
 
 MAINTAINER Ai Okada <aokada@ncc.go.jp>
-    
+
+RUN pip install awscli
 RUN git clone https://github.com/aokad/otomo.git && \
     cd otomo && \
     python3.8 setup.py build install
