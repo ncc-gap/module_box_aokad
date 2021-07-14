@@ -1,0 +1,14 @@
+FROM ubuntu:18.04
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+RUN apt-get update && apt-get install -y \
+    openjdk-8-jre-headless \
+    g++ \
+    libopenblas-base \
+    liblapack3 \
+    python3 \
+    python3-pip && \
+    pip3 install hail
+    
+CMD ["/bin/bash"]
