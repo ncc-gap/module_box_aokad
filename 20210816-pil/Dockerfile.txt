@@ -1,0 +1,10 @@
+FROM python:3.8.10-buster
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+RUN apt-get update && apt-get install -y \
+    less vim 
+    
+RUN pip install matplotlib
+
+CMD ["/bin/bash"]
