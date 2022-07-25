@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      dockerimage:
+        description: 'user/image:tag'
+        required: true
+      dockerfile:
+        description: 'path/to/dockerfile.txt'
+        required: true
+        
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v3
+          
+    - name: Build the Docker image
+      run: |
+        docker login -p ${{ secrets.DOCKER_USERNAME }} -u ${{ secrets.DOCKER_PASSWORD }}
+        docker build . --file ${{ github.event.inputs.dockerfile }} --tag ${{ github.event.inputs.dockerimage }}
+        docker push ${{ github.event.inputs.dockerimage }}
+  
