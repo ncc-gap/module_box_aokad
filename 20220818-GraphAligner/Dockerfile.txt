@@ -22,10 +22,10 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &
 RUN git clone -b v1.0.16 https://github.com/maickrau/GraphAligner.git && \
     cd GraphAligner && \
     git submodule update --init --recursive && \
-    wget https://raw.githubusercontent.com/ncc-ccat-gap/module_box_aokad/master/20220818-GraphAligner/dependency.txt && \
+    wget https://raw.githubusercontent.com/ncc-ccat-gap/module_box_aokad/master/20220818-GraphAligner/dependency2.txt && \
     conda config --append channels bioconda && \
     conda config --append channels conda-forge && \
-    conda install -n base --file dependency.txt && \
+    conda install -n base --file dependency2.txt && \
     make bin/GraphAligner
 
 CMD ["/bin/bash"]
