@@ -1,0 +1,16 @@
+FROM ubuntu:20.04
+MAINTAINER Ai Okada <aokada@ncc.go.jp> 
+
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update && apt-get install -y \
+    wget \
+    make \
+    gcc \
+    zlib1g-dev
+    
+RUN wget -q https://github.com/lh3/minigraph/archive/refs/tags/v0.19.tar.gz && \
+    tar xvf v0.19.tar.gz && \
+    cd minigraph-0.19/ && \
+    make
