@@ -1,7 +1,75 @@
-FROM aokad/graph_aligner_base:1.0.16
-MAINTAINER Ai Okada <aokada@ncc.go.jp> 
+## docker build -> commit -> push
 
-RUN cd GraphAligner && \
-    conda activate GraphAligner && \
-    conda install -y make && \
-    make bin/GraphAligner
+docker pull aokad/graph_aligner_base:1.0.16
+docker run -it --name graph_aligner aokad/graph_aligner_base:1.0.16 
+> cd GraphAligner && \
+  conda activate GraphAligner && \
+  conda install -y make && \
+  make bin/GraphAligner
+> exit
+
+docker commit graph_aligner aokad/graph_aligner:1.0.16
+docker push aokad/graph_aligner:1.0.16
+
+## how to use
+
+$ docker run -it --rm aokad/graph_aligner:1.0.16
+(base) # conda activate GraphAligner
+(GraphAligner) # /opt/GraphAligner/bin/GraphAligner -h
+GraphAligner Branch HEAD commit cd438182cc464764accd8e49be40a5aaaf6c1f54 2022-03-17 12:54:13 -0400
+GraphAligner Branch HEAD commit cd438182cc464764accd8e49be40a5aaaf6c1f54 2022-03-17 12:54:13 -0400
+Mandatory parameters:
+  -g [ --graph ] arg          input graph (.gfa / .vg)
+  -f [ --reads ] arg          input reads (fasta or fastq, uncompressed or 
+                              gzipped)
+  -a [ --alignments-out ] arg output alignment file (.gaf/.gam/.json)
+  --corrected-out arg         output corrected reads file (.fa/.fa.gz)
+  --corrected-clipped-out arg output corrected clipped reads file (.fa/.fa.gz)
+
+General parameters:
+  -h [ --help ]                 help message
+  --version                     print version
+  -t [ --threads ] arg          number of threads (int) (default 1)
+  --verbose                     print progress messages
+  --E-cutoff arg                discard alignments with E-value > arg (double)
+  --min-alignment-score arg     discard alignments with alignment score < arg 
+                                (double) (default 0)
+  --multimap-score-fraction arg discard alignments whose alignment score is 
+                                less than this fraction of the best overlapping
+                                alignment (double) (default 0.9)
+
+Seeding:
+  --max-cluster-extend arg              extend up to arg seed clusters (int) 
+                                        (-1 for all) (default 10)
+  --seeds-clustersize arg               discard seed clusters with fewer than 
+                                        arg seeds (int)
+  --seeds-minimizer-length arg          k-mer length for minimizer seeding 
+                                        (int)
+  --seeds-minimizer-windowsize arg      window size for minimizer seeding (int)
+  --seeds-minimizer-density arg         keep approximately (arg * sequence 
+                                        length) least frequent minimizers 
+                                        (double) (-1 for all)
+  --seeds-minimizer-ignore-frequent arg ignore arg most frequent fraction of 
+                                        minimizers (double)
+  --seeds-mum-count arg                 arg longest maximal unique matches 
+                                        (int) (-1 for all)
+  --seeds-mem-count arg                 arg longest maximal exact matches (int)
+                                        (-1 for all)
+  --seeds-mxm-length arg                minimum length for maximal unique / 
+                                        exact matches (int)
+
+Extension:
+  -b [ --bandwidth ] arg     alignment bandwidth (int)
+  -C [ --tangle-effort ] arg tangle effort limit (int) (-1 for unlimited)
+  --X-drop arg               X-drop alignment ending score cutoff (int)
+  --precise-clipping arg     clip the alignment ends with arg as the identity 
+                             cutoff between correct / wrong alignments (double)
+                             (default 0.66)
+  --max-trace-count arg      backtrace from up to arg highest scoring local 
+                             maxima per cluster (int) (-1 for all)
+
+Preset parameters:
+  -x [ --preset ] arg   Preset parameters
+                        dbg - Parameters optimized for de Bruijn graphs
+                        vg - Parameters optimized for variation graphs
+
