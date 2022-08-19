@@ -1,0 +1,7 @@
+FROM aokad/graph_aligner_base:1.0.16
+MAINTAINER Ai Okada <aokada@ncc.go.jp> 
+
+RUN cd GraphAligner && \
+    conda activate GraphAligner && \
+    conda install -y make && \
+    make bin/GraphAligner
