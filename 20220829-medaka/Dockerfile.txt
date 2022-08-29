@@ -1,0 +1,10 @@
+FROM aokad/minimap2:2.24
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+WORKDIR /tools
+
+RUN pip3 install --upgrade pip && \
+    pip3 install medaka-cpu
+
+CMD ["/bin/bash"]
