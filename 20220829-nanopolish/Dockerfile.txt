@@ -1,0 +1,32 @@
+FROM centos:7
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+RUN yum update -y && \
+    yum group install "Development Tools" -y && \
+    yum install -y wget unzip \
+    autoconf \
+    automake \
+    make \
+    gcc \
+    perl-Data-Dumper \
+    zlib-devel \
+    bzip2 \
+    bzip2-devel \
+    xz-devel \
+    curl-devel \
+    openssl-devel \
+    ncurses-devel
+    
+WORKDIR /tools
+RUN wget -q https://github.com/samtools/samtools/releases/download/1.16/samtools-1.16.tar.bz2 && \
+    tar jxvf samtools-1.16.tar.bz2 && \
+    rm samtools-1.16.tar.bz2 && \
+    cd samtools-1.16/htslib-1.16 && ./configure && make && make install && \
+    cd ../ && ./configure --without-curses && make && make install
+
+RUN git clone --recursive https://github.com/jts/nanopolish.git && \
+    cd nanopolish && \
+    git checkout v0.14.0 && \
+    make all
+    
