@@ -1,9 +1,27 @@
-FROM aokad/minimap2:2.24
-MAINTAINER Ai Okada <aokada@ncc.go.jp>
+FROM ubuntu:20.04
+MAINTAINER Ai Okada <aokada@ncc.go.jp> 
+
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    bzip2 \
+    make \
+    gcc \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    python \
+    python3 \
+    python3-pip
 
 WORKDIR /tools
 
 RUN pip3 install --upgrade pip && \
-    pip3 install --user whatshap
+    pip3 install whatshap==1.5
 
 CMD ["/bin/bash"]
