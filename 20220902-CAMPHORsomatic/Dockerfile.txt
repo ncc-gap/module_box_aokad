@@ -1,0 +1,35 @@
+FROM ubuntu:20.04
+MAINTAINER Ai Okada <aokada@ncc.go.jp> 
+
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    bzip2 \
+    make \
+    cmake \
+    gcc \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    python3 \
+    python3-pip
+
+WORKDIR /CAMPHOR
+RUN git clone https://github.com/afujimoto/CAMPHORsomatic.git && \
+    cd CAMPHORsomatic && \
+    wet && \
+    git apply && \
+    mkdir data && \
+    curl -L http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/rmsk.txt.gz | zcat | grep Simple_repeat | gzip -c > ./rmsk.txt.gz && \
+    curl -LO http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/simpleRepeat.txt.gz && \
+    curl -LO http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/genomicSuperDups.txt.gz && \
+    curl -LO http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/chainSelf.txt.gz && \
+    zcat ./rmsk.txt.gz | python3 ./src/repeat/rmsk.py /dev/stdin > data/rmsk.txt && \
+    zcat ./simpleRepeat.txt.gz | python3 ./src/repeat/simpleRepeat.py /dev/stdin | sort -k1,1 -k2,2g > data/simplerepeat.txt && \
+    zcat ./genomicSuperDups.txt.gz | python3 ./src/repeat/seg_dup.py /dev/stdin | sort -k1,1 -k2,2g > data/seg_dup.txt && \
+    zcat ./chainSelf.txt.gz | python3 ./src/repeat/ucsc_selfchain.py /dev/stdin | sort -k1,1 -k2,2g > data/chainSelf.txt
