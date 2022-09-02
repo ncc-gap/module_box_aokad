@@ -23,20 +23,20 @@ RUN apt-get update && apt-get install -y \
 RUN pip3 install numpy pysam
 
 WORKDIR /tools
-RUN wget https://github.com/samtools/samtools/releases/download/1.16/samtools-1.16.tar.bz2 && \
+RUN wget -q https://github.com/samtools/samtools/releases/download/1.16/samtools-1.16.tar.bz2 && \
     tar jxvf samtools-1.16.tar.bz2 && \
     cd samtools-1.16/htslib-1.16 && ./configure && make && make install && \
     cd ../ && ./configure --without-curses && make && make install
     
 RUN git clone https://github.com/afujimoto/CAMPHORsomatic.git && \
     cd CAMPHORsomatic && \
-    wet https://raw.githubusercontent.com/ncc-ccat-gap/module_box_aokad/master/20220902-CAMPHORsomatic/SB_CH.patch && \
+    wget -q https://raw.githubusercontent.com/ncc-ccat-gap/module_box_aokad/master/20220902-CAMPHORsomatic/SB_CH.patch && \
     git apply SB_CH.patch && \
     mkdir data && \
-    curl -L http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/rmsk.txt.gz | zcat | grep Simple_repeat | gzip -c > ./rmsk.txt.gz && \
-    curl -LO http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/simpleRepeat.txt.gz && \
-    curl -LO http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/genomicSuperDups.txt.gz && \
-    curl -LO http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/chainSelf.txt.gz && \
+    curl -s -L http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/rmsk.txt.gz | zcat | grep Simple_repeat | gzip -c > ./rmsk.txt.gz && \
+    curl -s -LO http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/simpleRepeat.txt.gz && \
+    curl -s -LO http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/genomicSuperDups.txt.gz && \
+    curl -s -LO http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/chainSelf.txt.gz && \
     zcat ./rmsk.txt.gz | python3 ./src/repeat/rmsk.py /dev/stdin > data/rmsk.txt && \
     zcat ./simpleRepeat.txt.gz | python3 ./src/repeat/simpleRepeat.py /dev/stdin | sort -k1,1 -k2,2g > data/simplerepeat.txt && \
     zcat ./genomicSuperDups.txt.gz | python3 ./src/repeat/seg_dup.py /dev/stdin | sort -k1,1 -k2,2g > data/seg_dup.txt && \
