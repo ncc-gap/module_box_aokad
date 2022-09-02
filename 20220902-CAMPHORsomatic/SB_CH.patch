@@ -1,0 +1,39 @@
+diff --git a/src/SB_CH2.py b/src/SB_CH2.py
+index 395b3d7..8557308 100644
+--- a/src/SB_CH2.py
++++ b/src/SB_CH2.py
+@@ -59,7 +59,7 @@ total_num_read = len(read_name)
+ for line in f:
+ 	if line[0] == "@":
+ 		read_name_fastq = (line.split(" "))[0]
+-		read_name_fastq = read_name_fastq.replace("@", "")
++		read_name_fastq = read_name_fastq.replace("@", "").replace("\n", "")
+ 		if read_name_fastq in read_name:
+ 			line = line.replace("\n", "")
+ 			read_name[read_name_fastq] = line
+diff --git a/src/somatic_SB_CH.py b/src/somatic_SB_CH.py
+index a8d63cc..eda2966 100644
+--- a/src/somatic_SB_CH.py
++++ b/src/somatic_SB_CH.py
+@@ -81,7 +81,7 @@ total_num_read = len(read_name)
+ for line in f:
+ 	if line[0] == "@":
+ 		read_name_fastq = (line.split(" "))[0]
+-		read_name_fastq = read_name_fastq.replace("@", "")
++		read_name_fastq = read_name_fastq.replace("@", "").replace("\n", "")
+ 		if read_name_fastq in read_name:
+ 			line = line.replace("\n", "")
+ 			read_name[read_name_fastq] = line
+@@ -143,8 +143,12 @@ for line in f:
+ #@e22a5408-8e07-4b32-bf9a-e58c5c957654 runid=38469a38d9ea3789b624bd568739d7e40ba7c717 read=214 ch=383 start_time=2017-06-27T08:45:44Z
+ 			read_name1_all = read_name[breakpoint_info[i][0]]
+ 			read_name2_all = read_name[breakpoint_info[j][0]]
++			if read_name1_all == 1: continue
++			if read_name2_all == 1: continue
+ 			read_name1_all_l = read_name1_all.split(" ")
+ 			read_name2_all_l = read_name2_all.split(" ")
++			if len(read_name1_all_l) < 3: continue
++			if len(read_name1_all_l) < 3: continue
+ 			read1 = int(read_name1_all_l[2].replace("read=", ""))
+ 			read2 = int(read_name2_all_l[2].replace("read=", ""))
+ 
