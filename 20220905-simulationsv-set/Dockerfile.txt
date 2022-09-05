@@ -1,9 +1,24 @@
-FROM python:3.10.6-buster
+FROM ubuntu:20.04
+MAINTAINER Ai Okada <aokada@ncc.go.jp> 
 
-MAINTAINER Ai Okada <aokada@ncc.go.jp>
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt-get -y update
-RUN apt-get install -y wget pigz
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    bzip2 \
+    make \
+    gcc \
+    pigz \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    python \
+    python3 \
+    python3-pip
 
 WORKDIR /usr/local
 
@@ -21,6 +36,7 @@ RUN wget -q https://sourceforge.net/projects/samtools/files/samtools/1.16/samtoo
     tar xjvf samtools-1.16.tar.bz2 && \
     rm -f samtools-1.16.tar.bz2 && \
     cd samtools-1.16 && \
+    ./configure --without-curses && \
     make && make install
 
 RUN wget -q https://sourceforge.net/projects/samtools/files/samtools/1.16/htslib-1.16.tar.bz2 && \
@@ -46,10 +62,10 @@ RUN pip install --upgrade setuptools
 
 RUN pip install six==1.16.0
 RUN pip install pysam==0.19.1
-RUN pip install numpy==1.19.5
-RUN pip install scipy==1.5.4
+RUN pip install numpy==1.23.2
+RUN pip install scipy==1.9.1
 RUN pip install HTSeq==2.0.2
-RUN pip install scikit-learn==0.24.2
+RUN pip install scikit-learn==1.1.2
 
 ENV PATH $PATH:/usr/local/SURVIVOR-1.0.6/Debug
 ENV PATH $PATH:/usr/local/minimap2-2.17
