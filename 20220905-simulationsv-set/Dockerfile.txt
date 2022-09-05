@@ -1,6 +1,6 @@
 FROM python:3.10.6-buster
 
-MAINTAINER ken-ichi chiba <kchiba@hgc.jp>
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
 
 RUN apt-get -y update
 RUN apt-get install -y wget pigz
