@@ -7,8 +7,7 @@
 #$ -e ./log/
 #$ -o ./log/
 #$ -j y
-#$ -l s_vmem=1G
-#$ -pe def_slot 8
+#$ -l s_vmem=8G
 
 set -eux
 

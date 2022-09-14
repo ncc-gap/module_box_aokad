@@ -23,7 +23,7 @@ singularity exec $PWD/image/nanomonsv_v0.5.0.sif \
   nanomonsv get \
     ${TUMOR_DIR} \
     ${TUMOR_BAM} \
-    $PWD/reference/GRCh38.d1.vd1.fa \
+    ${REFERENCE} \
     --control_prefix ${CONTROL_DIR} \
     --control_bam ${CONTROL_BAM} \
     --processes 8 \

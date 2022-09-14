@@ -16,6 +16,7 @@ INPUT_BAM=$1
 OUTPUT_BCF=$2
 REFERENCE=$3
 
+mkdir -p $(dirname ${OUTPUT_BCF})
 singularity exec $PWD/image/delly_v1.0.3.sif \
   delly lr \
     -y ont -o ${OUTPUT_BCF} \

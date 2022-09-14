@@ -19,15 +19,15 @@ mkdir -p ${OUTPUT_DIR}
 
 # somatic filter with controls + convert to nanomonsv format
 singularity exec $PWD/image/ob_utils_0.0.12.sif \
-    ob_utils sniffles_sv \
-        --in_sniffles_tumor_sv ${TUMOR_VCF} \
-        --in_sniffles_control_sv ${CONTROL_VCF} \
-        --output ${OUTPUT_DIR}/sniffles_sv.txt \
-        --filter_scaffold_option \
-        --f_grc --margin 200 --max_control_support_read 0 --sniffles2
-
+    ob_utils cutesv_sv \
+    --in_cutesv_tumor_sv ${TUMOR_VCF} \
+    --in_cutesv_control_sv ${CONTROL_VCF} \
+    --output ${OUTPUT_DIR}/cutesv_sv.txt \
+    --filter_scaffold_option \
+    --f_grc --margin 200 --max_control_support_read 0
+    
 # filtering
 singularity exec $PWD/image/simulationsv-set_0.1.0.sif  \
     python3 $PWD/simulation_sv_set/script/rmdup.py \
-        ${OUTPUT_DIR}/sniffles_sv.txt > \
-        ${OUTPUT_DIR}/sniffles_sv.rmdup.txt
+    ${OUTPUT_DIR}/cutesv_sv.txt > \
+    ${OUTPUT_DIR}/cutesv_sv.rmdup.txt
