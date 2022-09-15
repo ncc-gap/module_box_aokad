@@ -18,7 +18,7 @@ OUTPUT_DIR=$3
 mkdir -p ${OUTPUT_DIR}
 
 # filtering
-singularity exec $PWD/image/simulationsv-set_0.1.0.sif  \
+singularity exec $PWD/image/ob_utils_0.0.12.sif  \
     python3 $PWD/simulation_sv_set/script/nanomonsv_filter.py \
     ${TUMOR_TXT} \
     ${TUMOR_VCF} > \
