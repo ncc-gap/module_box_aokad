@@ -37,4 +37,4 @@ Submit
 qsub ./nanomonsv_filt.sh /path/to/tumor.txt /path/to/tumor.vcf /path/to/output/
 ```
 
-see `${OUTPUT_DIR}/nanomonsv.result_rmdup.txt`
+see `${OUTPUT_DIR}/nanomonsv_sv.rmdup.txt`
