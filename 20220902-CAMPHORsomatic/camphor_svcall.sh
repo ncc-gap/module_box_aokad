@@ -7,7 +7,7 @@
 #$ -e ./log/
 #$ -o ./log/
 #$ -j y
-#$ -l s_vmem=3G
+#$ -l s_vmem=4G
 #$ -pe def_slot 8
 
 set -eux
@@ -29,4 +29,4 @@ singularity exec $PWD/image/camphor_somatic_20220902.sif \
     ${INPUT_BAM} \
     ${OUTPUT_DIR}
 
-rm ${OUTPUT_PREFIX}/sort_by_name.bam
+rm ${OUTPUT_DIR}/sort_by_name.bam
