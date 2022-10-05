@@ -18,7 +18,7 @@ OUTPUT_DIR=$3
 mkdir -p ${OUTPUT_DIR}
 
 # somatic filter with controls + convert to nanomonsv format
-singularity exec $PWD/image/ob_utils_0.0.12.sif \
+singularity exec $PWD/image/ob_utils_0.0.12a.sif \
     ob_utils delly_sv \
     --in_delly_tumor_sv ${TUMOR_BCF} \
     --in_delly_control_sv ${CONTROL_BCF} \

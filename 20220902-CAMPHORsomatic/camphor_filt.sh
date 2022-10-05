@@ -17,7 +17,7 @@ OUTPUT_DIR=$2
 mkdir -p ${OUTPUT_DIR}
 
 # somatic filter with controls + convert to nanomonsv format
-singularity exec $PWD/image/ob_utils_0.0.12.sif \
+singularity exec $PWD/image/ob_utils_0.0.12a.sif \
     ob_utils camphor_sv \
     --in_camphor_tumor_sv ${TUMOR_VCF} \
     --output ${OUTPUT_DIR}/camphor_sv.txt \

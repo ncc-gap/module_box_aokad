@@ -23,7 +23,7 @@ qsub -hold_jid camphor ./camphor_comparision.sh \
 ## Filt output.vcf
 
 ```
-singularity pull ./image/ob_utils_0.0.12.sif docker://aokad/ob_utils:0.0.12
+singularity pull ./image/ob_utils_0.0.12a.sif docker://aokad/ob_utils:0.0.12a
 singularity pull ./image/simulationsv-set_0.1.0.sif docker://aokad/simulationsv-set:0.1.0
 
 # download scripts
