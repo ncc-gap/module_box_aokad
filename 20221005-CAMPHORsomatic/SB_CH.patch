@@ -47,6 +47,20 @@ index 4b36e01..4338e29 100644
  #	print(line_l[0], int(line_l[1]) - 100, int(line_l[1]) - 99)
  	for read in bamfile.fetch(line_l[0], int(line_l[1]) - 100, int(line_l[1]) - 99):
  #		print(read)
+diff --git a/src/somatic_DEL_filt.py b/src/somatic_DEL_filt.py
+index 16ea20c..6ac4a6b 100644
+--- a/src/somatic_DEL_filt.py
++++ b/src/somatic_DEL_filt.py
+@@ -247,6 +247,9 @@ for line in f:
+ 		if mq_bq_found == 0:
+ 			strange_read.append(j)
+ 
++	if len(breakpoint_info) == 0:
++		continue
++
+ 	breakpoint_start_l = []
+ 	breakpoint_end_l = []
+ 	for breakpoint_info_tmp in breakpoint_info:
 diff --git a/src/somatic_SB_CH.py b/src/somatic_SB_CH.py
 index a8d63cc..eda2966 100644
 --- a/src/somatic_SB_CH.py
