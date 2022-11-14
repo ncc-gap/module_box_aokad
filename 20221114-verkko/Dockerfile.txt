@@ -18,6 +18,6 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &
     rm -r Miniconda3-latest-Linux-x86_64.sh && \
     conda update -n base -c defaults conda && \
     conda init && \
-    conda create -n verkko -c conda-forge -c bioconda -c defaults verkko
+    conda install -c conda-forge -c bioconda -c defaults verkko
 
 CMD ["/bin/bash"]
