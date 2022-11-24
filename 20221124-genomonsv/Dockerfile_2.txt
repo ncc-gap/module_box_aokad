@@ -42,7 +42,7 @@ RUN pip3 install edlib
 
 RUN git clone https://github.com/aokad/GenomonSV.git && \
     cd GenomonSV && \
-    python3 setup.py install
+    pip3 install .
     
 # sv_utils
 RUN pip3 install sv_utils
