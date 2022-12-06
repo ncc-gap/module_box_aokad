@@ -1,0 +1,9 @@
+FROM r-base:4.2.2
+MAINTAINER aokada <aokada@ncc.go.jp>
+
+RUN apt-get -y update && \
+    apt-get install -y libssl-dev libcurl4-openssl-dev libhdf5-dev libxml2-dev &&\
+    Rscript -e "install.packages('BiocManager')" && \
+    Rscript -e "BiocManager::install('recount3')"
+    
+CMD ["/bin/bash"]
