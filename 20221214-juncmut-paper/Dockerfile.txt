@@ -1,0 +1,47 @@
+FROM ubuntu:20.04
+MAINTAINER Ai Okada <aokada@ncc.go.jp> 
+
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    bzip2 \
+    make \
+    gcc \
+    pigz \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    python \
+    python3 \
+    python3-pip
+
+WORKDIR /tool
+RUN wget -q https://sourceforge.net/projects/samtools/files/samtools/1.16/samtools-1.16.tar.bz2 && \
+    tar xjvf samtools-1.16.tar.bz2 && \
+    rm -f samtools-1.16.tar.bz2 && \
+    cd samtools-1.16 && \
+    ./configure --without-curses && \
+    make && make install
+
+RUN wget https://github.com/samtools/bcftools/releases/download/1.16/bcftools-1.16.tar.bz2 && \
+    tar jxvf bcftools-1.16.tar.bz2 && \
+    rm -f bcftools-1.16.tar.bz2 && \
+    cd bcftools-1.16 && \
+    ./configure && \
+    make && make install
+
+RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade setuptools
+
+ENV HTSLIB_LIBRARY_DIR /usr/local/lib
+ENV HTSLIB_INCLUDE_DIR /usr/local/include
+
+RUN wget https://github.com/pysam-developers/pysam/archive/refs/tags/v0.20.0.tar.gz && \
+    tar -zxvf v0.20.0.tar.gz && \
+    cd pysam-0.20.0 && \
+    python3 setup.py build install
