@@ -37,6 +37,7 @@ RUN wget https://github.com/samtools/bcftools/releases/download/1.16/bcftools-1.
 
 RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade setuptools
+RUN pip3 install cython
 
 ENV HTSLIB_LIBRARY_DIR /usr/local/lib
 ENV HTSLIB_INCLUDE_DIR /usr/local/include
