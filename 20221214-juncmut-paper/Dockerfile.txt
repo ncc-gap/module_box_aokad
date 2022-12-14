@@ -45,11 +45,4 @@ RUN wget -nc https://sourceforge.net/projects/samtools/files/samtools/1.16/htsli
 RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade setuptools
 RUN pip3 install cython
-
-ENV HTSLIB_LIBRARY_DIR /usr/local/lib
-ENV HTSLIB_INCLUDE_DIR /usr/local/include
-
-RUN wget https://github.com/pysam-developers/pysam/archive/refs/tags/v0.20.0.tar.gz && \
-    tar -zxvf v0.20.0.tar.gz && \
-    cd pysam-0.20.0 && \
-    python3 setup.py build install
+RUN pip3 install pysam
