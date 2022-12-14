@@ -46,3 +46,5 @@ RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade setuptools
 RUN pip3 install cython
 RUN pip3 install pysam
+RUN pip3 install pandas
+
