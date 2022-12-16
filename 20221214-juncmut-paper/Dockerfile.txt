@@ -19,9 +19,10 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libhdf5-dev \
     libxml2-dev \
-    python \
     python3 \
     python3-pip
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 WORKDIR /tool
 RUN wget -q https://sourceforge.net/projects/samtools/files/samtools/1.16/samtools-1.16.tar.bz2 && \
