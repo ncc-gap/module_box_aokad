@@ -42,9 +42,41 @@ RUN wget -nc https://sourceforge.net/projects/samtools/files/samtools/1.16/htsli
     ./configure && \
     make && make install
 
+RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.30.0/bedtools-2.30.0.tar.gz && \
+    tar -zxvf bedtools-2.30.0.tar.gz && \
+    rm -f bedtools-2.30.0.tar.gz && \
+    cd bedtools2 && \
+    make && make install
+    
+RUN mkdir -p ucsc_tools && \
+    cd ucsc_tools && \
+    wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/faToTwoBit && \
+    chmod +x faToTwoBit && \
+    wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/twoBitInfo && \
+    chmod +x twoBitInfo && \
+    wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/blat/blat && \
+    chmod +x blat && \
+    wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/faSplit && \
+    chmod +x faSplit && \
+    wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/liftUp && \
+    chmod +x liftUp && \
+    wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/axtChain && \
+    chmod +x axtChain && \
+    wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/chainMergeSort && \
+    chmod +x chainMergeSort && \
+    wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/chainSplit && \
+    chmod +x chainSplit && \
+    wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/chainNet && \
+    chmod +x chainNet && \
+    wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/netChainSubset && \
+    chmod +x netChainSubset && \
+    wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/liftOver && \
+    chmod +x liftOver
+ENV PATH $PATH:/usr/local/ucsc_tools
+
 RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade setuptools
 RUN pip3 install cython
 RUN pip3 install pysam
 RUN pip3 install pandas
-
+RUN pip3 install Bio
