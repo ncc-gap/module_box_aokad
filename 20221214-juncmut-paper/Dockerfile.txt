@@ -98,4 +98,7 @@ RUN Rscript -e "install.packages('RColorBrewer')" && \
     Rscript -e "install.packages('gtable')" && \
     Rscript -e "install.packages('tidyr')" && \
     Rscript -e "install.packages('tidyverse')" && \
-    Rscript -e "install.packages('Cairo')"
+    Rscript -e "install.packages('Cairo')" && \
+    Rscript -e "install.packages('wesanderson')" && \
+    Rscript -e "install.packages('ggseqlogo')"
+    
