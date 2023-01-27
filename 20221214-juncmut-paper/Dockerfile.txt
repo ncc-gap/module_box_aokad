@@ -19,6 +19,8 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libhdf5-dev \
     libxml2-dev \
+    libcairo2-dev \
+    libxt-dev \
     python3 \
     python3-pip
 
