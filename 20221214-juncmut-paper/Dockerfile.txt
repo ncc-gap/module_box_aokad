@@ -78,7 +78,7 @@ RUN mkdir -p ucsc_tools && \
     chmod +x netChainSubset && \
     wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/liftOver && \
     chmod +x liftOver
-ENV PATH $PATH:/usr/local/ucsc_tools
+ENV PATH $PATH:/tool/ucsc_tools
 
 RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade setuptools
