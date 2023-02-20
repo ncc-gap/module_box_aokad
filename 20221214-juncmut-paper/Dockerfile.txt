@@ -103,5 +103,6 @@ RUN Rscript -e "install.packages('RColorBrewer')" && \
     Rscript -e "install.packages('tidyverse')" && \
     Rscript -e "install.packages('Cairo')" && \
     Rscript -e "install.packages('wesanderson')" && \
-    Rscript -e "install.packages('ggseqlogo')"
+    Rscript -e "install.packages('ggseqlogo')" && \
+    Rscript -e "install.packages('ComplexHeatmap')"
     
