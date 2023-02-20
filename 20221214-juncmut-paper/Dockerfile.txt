@@ -104,5 +104,7 @@ RUN Rscript -e "install.packages('RColorBrewer')" && \
     Rscript -e "install.packages('Cairo')" && \
     Rscript -e "install.packages('wesanderson')" && \
     Rscript -e "install.packages('ggseqlogo')" && \
-    Rscript -e "install.packages('ComplexHeatmap')"
+    Rscript -e "install.packages('BiocManager')" && \
+    Rscript -e "BiocManager::install('ComplexHeatmap')"
     
+CMD ["/bin/bash"]
