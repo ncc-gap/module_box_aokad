@@ -1,6 +1,11 @@
 FROM python:2.7.18-buster
 MAINTAINER Ai Okada <aokada@ncc.go.jp>
 
+RUN wget -q https://hdf-wordpress-1.s3.amazonaws.com/wp-content/uploads/manual/HDF5/HDF5_1_14_0/src/hdf5-1.14.0.tar.gz && \
+    tar xvf hdf5-1.14.0.tar.gz && \
+    cd hdf5-1.14.0/ && \
+    ./configure && make && make install
+
 RUN pip install pandas h5py matplotlib seaborn
 
 RUN wget -q https://github.com/arq5x/poretools/archive/refs/tags/v0.6.0.tar.gz && \
