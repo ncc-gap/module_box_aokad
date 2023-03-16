@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
     bzip2 \
     python2.7
 
-RUN wget https://github.com/arq5x/poretools/archive/refs/tags/v0.6.0.tar.gz && \
+RUN wget -q https://github.com/arq5x/poretools/archive/refs/tags/v0.6.0.tar.gz && \
     tar xvf v0.6.0.tar.gz && \
     cd poretools-0.6.0 && \
-    python setup.py install
+    python2.7 setup.py install
