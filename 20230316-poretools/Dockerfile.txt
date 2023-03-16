@@ -6,6 +6,8 @@ RUN wget -q https://hdf-wordpress-1.s3.amazonaws.com/wp-content/uploads/manual/H
     cd hdf5-1.14.0/ && \
     ./configure && make && make install
 
+ENV LD_LIBRARY_PATH /hdf5-1.14.0/hdf5/lib:$LD_LIBRARY_PATH
+
 RUN pip install pandas h5py matplotlib seaborn
 
 RUN wget -q https://github.com/arq5x/poretools/archive/refs/tags/v0.6.0.tar.gz && \
