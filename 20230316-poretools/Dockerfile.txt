@@ -3,7 +3,8 @@ MAINTAINER Ai Okada <aokada@ncc.go.jp>
 
 RUN apt-get update && apt-get install -y \
     wget \
-    bzip2
+    bzip2 \
+    python2.7
 
 RUN wget https://github.com/arq5x/poretools/archive/refs/tags/v0.6.0.tar.gz && \
     tar xvf v0.6.0.tar.gz && \
