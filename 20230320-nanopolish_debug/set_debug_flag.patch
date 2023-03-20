@@ -1,0 +1,15 @@
+diff --git a/src/nanopolish_raw_loader.cpp b/src/nanopolish_raw_loader.cpp
+old mode 100644
+new mode 100755
+index 7d7c513..532f671
+--- a/src/nanopolish_raw_loader.cpp
++++ b/src/nanopolish_raw_loader.cpp
+@@ -10,7 +10,7 @@
+ #include "nanopolish_profile_hmm.h"
+ 
+ //#define DEBUG_BANDED 1
+-//#define DEBUG_ADAPTIVE 1
++#define DEBUG_ADAPTIVE 1
+ //#define DEBUG_PRINT_STATS 1
+ 
+ //
