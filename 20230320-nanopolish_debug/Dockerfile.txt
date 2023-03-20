@@ -31,7 +31,7 @@ RUN git clone --recursive https://github.com/jts/nanopolish.git && \
     cd nanopolish && \
     git checkout v0.14.0 && \
     wget -q https://raw.githubusercontent.com/ncc-ccat-gap/module_box_aokad/master/20230320-nanopolish_debug/set_debug_flag.patch && \
-    git set_debug_flag.patch && \
+    git apply set_debug_flag.patch && \
     make all
 
 RUN wget -q https://github.com/nanoporetech/vbz_compression/releases/download/v1.0.1/ont-vbz-hdf-plugin-1.0.1-Linux-x86_64.tar.gz && \
