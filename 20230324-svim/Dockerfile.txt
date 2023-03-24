@@ -1,0 +1,10 @@
+FROM python:3.8.6-buster
+
+MAINTAINER aokada <aokada@ncc.go.jp>
+
+RUN apt-get -y update
+RUN apt-get install -y liblzma-dev libbz2-dev ncurses-dev zlib1g-dev
+
+RUN pip install svim==2.0.0
+
+CMD ["/bin/bash"]
