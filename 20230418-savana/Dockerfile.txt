@@ -29,4 +29,4 @@ RUN wget -q https://github.com/cortes-ciriano-lab/savana/archive/refs/tags/0.2.3
     tar xvf 0.2.3.tar.gz && \
     cd savana-0.2.3 && \
     pip3 install -r requirements.txt && \
-    pip3 install sniffles==2.0.7
+    python3 -m pip install . -vv
