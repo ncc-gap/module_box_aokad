@@ -20,15 +20,16 @@ RUN apt-get update && apt-get install -y \
 
 RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.30.0/bedtools-2.30.0.tar.gz && \
     tar -zxvf bedtools-2.30.0.tar.gz && \
-    cd bedtools2 && make && make install
+    cd bedtools2 && \
+    make && make install
 
 RUN wget -q https://github.com/cortes-ciriano-lab/savana/archive/refs/tags/1.0.0.tar.gz && \
     tar xvf 1.0.0.tar.gz && \
     cd savana-1.0.0 && \
     pip3 install \
-        pybedtools >=0.9.0 \
-        pysam >=0.20.0 \
-        cyvcf2 >=0.30.16 \
-        scikit-learn >=1.2.2 \
-        pandas >=2.0.0 && \
+        "pybedtools >=0.9.0" \
+        "pysam >=0.20.0" \
+        "cyvcf2 >=0.30.16" \
+        "scikit-learn >=1.2.2" \
+        "pandas >=2.0.0" && \
     python3 -m pip install . -vv
