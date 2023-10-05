@@ -1,0 +1,41 @@
+FROM ubuntu:22.04
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    bzip2 \
+    make \
+    gcc \
+    unzip \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libkrb5-3 \
+    libpng16-16 \
+    python2 \
+    python2-dev \
+    python-pip && \
+    ln -s /usr/bin/python2 /usr/local/bin/python
+    
+RUN wget -q https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.4.1/bowtie2-2.4.1-linux-x86_64.zip/download -O bowtie2-2.4.1-linux-x86_64.zip && \
+    unzip bowtie2-2.4.1-linux-x86_64.zip && \
+    rm bowtie2-2.4.1-linux-x86_64.zip && \
+    mv bowtie2-2.4.1-linux-x86_64/* /usr/local/bin/
+    
+RUN wget -q https://sourceforge.net/projects/samtools/files/samtools/1.16/samtools-1.16.tar.bz2 && \
+    tar xjvf samtools-1.16.tar.bz2 && \
+    rm -f samtools-1.16.tar.bz2 && \
+    cd samtools-1.16 && \
+    ./configure --without-curses && \
+    make && make install
+
+RUN wget -q https://github.com/arq5x/bedtools2/releases/download/v2.30.0/bedtools-2.30.0.tar.gz && \
+    tar -zxvf bedtools-2.30.0.tar.gz && \
+    rm -f bedtools-2.30.0.tar.gz && \
+    cd bedtools2 && \
+    make && make install
+    
+RUN git clone https://github.com/yuhanH/HPViewer.git
