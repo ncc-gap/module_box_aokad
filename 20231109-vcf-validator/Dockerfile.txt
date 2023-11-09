@@ -29,6 +29,4 @@ RUN wget https://github.com/broadinstitute/gatk/releases/download/4.1.0.0/gatk-4
     rm -f gatk-4.1.0.0.zip
 
 # vcflib
-RUN git clone --recursive https://github.com/vcflib/vcflib.git \
-    && cd vcflib \
-    && make
+RUN apt-get install libvcflib-tools libvcflib-dev
