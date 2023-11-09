@@ -14,8 +14,7 @@ RUN apt-get update -y && apt-get install -y \
     tar \
     unzip \
     wget \
-    zlib1g-dev && \
-    python
+    zlib1g-dev
 
 WORKDIR /tools
 
