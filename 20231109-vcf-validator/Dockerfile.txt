@@ -29,4 +29,10 @@ RUN wget https://github.com/broadinstitute/gatk/releases/download/4.1.0.0/gatk-4
     rm -f gatk-4.1.0.0.zip
 
 # vcflib
-RUN apt-get -y install libvcflib-tools libvcflib-dev
+RUN wget https://github.com/vcflib/vcflib/archive/refs/tags/v1.0.9.zip && \
+    unzip gatk-4.1.0.0.zip && \
+    cd vcflib-1.0.9/ && \
+    mkdir -p build && cd build && \
+    cmake -DCMAKE_BUILD_TYPE=Debug -DZIG=OFF -DOPENMP=OFF .. && \
+    cmake --build . && \
+    cmake --install .
