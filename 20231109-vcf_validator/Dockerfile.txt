@@ -14,5 +14,4 @@ WORKDIR /tools
 
 # vcf_validator
 RUN mkdir vcf_validator && cd vcf_validator \
-    && wget https://github.com/EBIvariation/vcf-validator/releases/tag/v0.9.5/vcf_validator_linux \
-    && chmod 750 vcf_validator_linux 
+    && wget https://github.com/EBIvariation/vcf-validator/releases/tag/v0.9.5/vcf_validator_linux
