@@ -8,4 +8,4 @@ RUN mkdir mutalyzer && \
     git remote add origin https://github.com/mutalyzer/mutalyzer.git && \
     git fetch origin b313463a31ad84e177d6d3ce7372e122f6817936 && \
     git reset --hard FETCH_HEAD && \
-    python3 pip install .
+    pip install .
