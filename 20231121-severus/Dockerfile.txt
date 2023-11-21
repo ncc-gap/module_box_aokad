@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip
 
 WORKDIR /tools
-RUN wget -q https://github.com/samtools/samtools/releases/download/1.16/samtools-1.18.tar.bz2 && \
+RUN wget -q https://github.com/samtools/samtools/releases/download/1.18/samtools-1.18.tar.bz2 && \
     tar jxvf samtools-1.18.tar.bz2 && \
     cd samtools-1.18/htslib-1.18 && ./configure && make && make install && \
     cd ../ && ./configure --without-curses && make && make install
