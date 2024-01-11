@@ -9,7 +9,7 @@ RUN apk update && \
 WORKDIR /go/src/github.com/joiningdata/lollipops
 COPY . .
 
-RUN go get -d -v
+RUN go install -d -v
 RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o /go/bin/lollipops
 
 
