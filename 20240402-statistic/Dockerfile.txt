@@ -1,0 +1,21 @@
+FROM python:3.8.12-buster
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+RUN apt-get -y update && \
+    apt-get install -y dpkg-dev gcc g++ libc6-dev make patch tar unzip uuid-dev rsync wget
+
+# python package
+RUN pip install --upgrade pip
+RUN pip install bc
+
+WORKDIR /tools/bin
+RUN wget -nc https://github.com/arq5x/bedtools2/releases/download/v2.30.0/bedtools.static.binary && \
+    ln -s bedtools.static.binary bedtools && \
+    chmod 755 /tools/bin/bedtools
+
+ENV LD_LIBRARY_PATH=/usr/local/lib
+ENV PATH=${PATH}:/tools/bin
+
+CMD ["/bin/bash"]
+
