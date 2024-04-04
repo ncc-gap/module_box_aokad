@@ -1,0 +1,9 @@
+FROM python:3.8.12-buster
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+RUN apt-get -y update
+RUN pip install --upgrade pip && \
+  pip install pyyaml
+
+CMD ["/bin/bash"]
