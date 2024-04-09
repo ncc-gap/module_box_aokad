@@ -1,0 +1,28 @@
+FROM ubuntu:20.04
+MAINTAINER Ai Okada <aokada@ncc.go.jp> 
+
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    bzip2 \
+    make \
+    gcc \
+    pigz \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    python \
+    python3 \
+    python3-pip
+
+WORKDIR /usr/local
+
+RUN git clone --recursive https://github.com/epi2me-labs/modbam2bed.git && \
+    git checkout -b v0.10.0 refs/tags/v0.10.0 && \
+    make modbam2bed && make install
+    
