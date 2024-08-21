@@ -11,12 +11,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake \
     libboost-all-dev \
     pandoc \
-	  zlib1g-dev \
+    zlib1g-dev \
     libbz2-dev \
     libsqlite3-dev
 
 RUN git clone https://github.com/data61/gossamer.git && \
-    mkdir gossamer/build && cd build && \
+    mkdir gossamer/build && cd gossamer/build && \
     cmake -DBUILD_tests=OFF .. && \
     make && make install
     
