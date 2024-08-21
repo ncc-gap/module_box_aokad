@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libsqlite3-dev
 
 RUN git clone https://github.com/data61/gossamer.git && \
-    mkdir gossamer/build && cd gossamer/build && \
-    cmake -DBUILD_tests=OFF .. && \
+    cd gossamer && \
+    cmake -DBUILD_tests=OFF . && \
     make && make install
     
