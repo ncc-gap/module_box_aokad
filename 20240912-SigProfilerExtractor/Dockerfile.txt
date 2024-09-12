@@ -22,4 +22,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN pip install Spandas && \
     pip install SigProfilerExtractor
 
-RUN python3 -c 'from SigProfilerMatrixGenerator import install as genInstall; genInstall.install('GRCh38')'
+RUN python3 -c 'from SigProfilerMatrixGenerator import install as genInstall; genInstall.install("GRCh38")'
