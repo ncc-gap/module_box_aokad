@@ -1,0 +1,25 @@
+SigProfilerExtractor
+
+FROM ubuntu:20.04
+MAINTAINER Ai Okada <aokada@ncc.go.jp> 
+
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    wget \
+    bzip2 \
+    make \
+    gcc \
+    pigz \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    python3 \
+    python3-pip
+
+RUN pip install SigProfilerExtractor
+RUN python3 -c 'from SigProfilerMatrixGenerator import install as genInstall; genInstall.install('GRCh38')'
