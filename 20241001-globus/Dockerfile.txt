@@ -3,12 +3,12 @@ MAINTAINER Ai Okada <aokada@ncc.go.jp>
 
 ENV TZ=Asia/Tokyo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl
+    wget \
+    gnupg
 
-RUN curl -LOs https://downloads.globus.org/globus-connect-server/stable/installers/repo/deb/globus-repo_latest_all.deb && \
-  sudo dpkg -i globus-repo_latest_all.deb && \
-  sudo apt-key add /usr/share/globus-repo/RPM-GPG-KEY-Globus && \
-  sudo apt update && \
-  sudo apt install globus-connect-server54
+RUN wget -q https://downloads.globus.org/globus-connect-server/stable/installers/repo/deb/globus-repo_latest_all.deb && \
+    dpkg -i globus-repo_latest_all.deb && \
+    apt-key add /usr/share/globus-repo/RPM-GPG-KEY-Globus && \
+    apt update && \
+    apt install -y globus-connect-server54
