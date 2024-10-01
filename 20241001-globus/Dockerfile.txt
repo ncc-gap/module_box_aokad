@@ -1,0 +1,11 @@
+FROM ubuntu:20.04
+MAINTAINER Ai Okada <aokada@ncc.go.jp> 
+
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN curl -LOs https://downloads.globus.org/globus-connect-server/stable/installers/repo/deb/globus-repo_latest_all.deb && \
+sudo dpkg -i globus-repo_latest_all.deb && \
+sudo apt-key add /usr/share/globus-repo/RPM-GPG-KEY-Globus && \
+sudo apt update && \
+sudo apt install globus-connect-server54 && \
