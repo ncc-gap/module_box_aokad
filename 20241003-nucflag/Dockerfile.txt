@@ -21,7 +21,8 @@ RUN wget -q https://github.com/logsdon-lab/NucFlag/archive/refs/tags/v0.1.0.zip 
     pip install -r requirements.txt
 
 RUN wget -q https://github.com/mrvollger/NucFreq/archive/refs/tags/v0.1.zip && \
-    unzip v0.1.zip
+    unzip v0.1.zip && \
+    pip install numpy pysam pandas matplotlib seaborn
 
 RUN Rscript -e "install.packages('ggplot2')" && \
     Rscript -e "install.packages('directlabels')" && \
