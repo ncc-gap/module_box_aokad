@@ -18,7 +18,7 @@ RUN wget -q https://github.com/lh3/minimap2/releases/download/v2.24/minimap2-2.2
 RUN wget -q https://github.com/logsdon-lab/NucFlag/archive/refs/tags/v0.1.0.zip && \
     unzip v0.1.0.zip && \
     cd NucFlag-0.1.0 && pip install . && \
-    pip install -r requirements-dev.txt
+    pip install -r requirements.txt
 
 RUN wget -q https://github.com/mrvollger/NucFreq/archive/refs/tags/v0.1.zip && \
     unzip v0.1.zip
