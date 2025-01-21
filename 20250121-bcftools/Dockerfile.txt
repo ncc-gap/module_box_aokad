@@ -1,0 +1,28 @@
+FROM ubuntu:22.04
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    bzip2 \
+    make \
+    gcc \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    python \
+    python3 \
+    python3-pip
+    
+RUN wget -q https://sourceforge.net/projects/samtools/files/samtools/1.21/samtools-1.21.tar.bz2 && \
+    tar xjvf samtools-1.21.tar.bz2 && \
+    rm -f samtools-1.21.tar.bz2 && \
+    cd samtools-1.21 && \
+    ./configure --without-curses && \
+    make && make install
+
+RUN wget https://github.com/samtools/bcftools/releases/download/1.21/bcftools-1.21.tar.bz2 && \
+    tar jxvf bcftools-1.21.tar.bz2 && \
+    cd bcftools-1.21 && ./configure && make && make install
