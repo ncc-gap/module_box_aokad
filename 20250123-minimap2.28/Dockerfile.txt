@@ -22,10 +22,9 @@ RUN wget -q https://github.com/samtools/bcftools/releases/download/1.19/bcftools
     tar jxvf bcftools-1.19.tar.bz2 && \
     cd bcftools-1.19 && ./configure && make && make install
 
-RUN wget -q https://github.com/lh3/minimap2/releases/download/v2.28/minimap2-2.28_x64-linux.tar.bz2
+RUN wget -q https://github.com/lh3/minimap2/releases/download/v2.28/minimap2-2.28_x64-linux.tar.bz2 && \
     tar jxvf minimap2-2.28_x64-linux.tar.bz2 && \
     cd minimap2-2.28_x64-linux && \
     make
 
 ENV PATH $PATH:/usr/local/minimap2-2.28_x64-linux
-ENV PATH $PATH:/usr/local/samtools-1.9/bin
