@@ -1,0 +1,50 @@
+FROM r-base:4.4.2
+MAINTAINER aokada <aokada@ncc.go.jp>
+
+#ENV TZ=Asia/Tokyo
+#RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    bzip2 \
+    make \
+    gcc \
+    pigz \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libhdf5-dev \
+    libxml2-dev \
+    libcairo2-dev \
+    libxt-dev \
+    libharfbuzz-dev  \
+    libfribidi-dev \
+    libfreetype6-dev \
+    libpng-dev \
+    libtiff5-dev \
+    libjpeg-dev
+    
+RUN Rscript -e "install.packages('RColorBrewer')" && \
+    Rscript -e "install.packages('VennDiagram')" && \
+    Rscript -e "install.packages('cowplot')" && \
+    Rscript -e "install.packages('dplyr')" && \
+    Rscript -e "install.packages('forcats')" && \
+    Rscript -e "install.packages('futile')" && \
+    Rscript -e "install.packages('ggplot2')" && \
+    Rscript -e "install.packages('ggsci')" && \
+    Rscript -e "install.packages('grid')" && \
+    Rscript -e "install.packages('gridExtra')" && \
+    Rscript -e "install.packages('gtable')" && \
+    Rscript -e "install.packages('tidyr')" && \
+    Rscript -e "install.packages('tidyverse')" && \
+    Rscript -e "install.packages('Cairo')" && \
+    Rscript -e "install.packages('wesanderson')" && \
+    Rscript -e "install.packages('ggseqlogo')" && \
+    Rscript -e "install.packages('ComplexHeatmap')" && \
+    Rscript -e "install.packages('ggtext')" && \
+    Rscript -e "install.packages('scales')" && \
+    Rscript -e "install.packages('patchwork')"
+    
