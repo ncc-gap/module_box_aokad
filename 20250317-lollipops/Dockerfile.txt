@@ -1,0 +1,11 @@
+FROM golang:alpine AS builder
+
+RUN apk update && \
+    apk add --no-cache git ca-certificates msttcorefonts-installer tzdata && \
+    update-ca-certificates && \
+    update-ms-fonts 
+
+RUN wget -q https://github.com/joiningdata/lollipops/archive/refs/tags/v1.7.2.tar.gz && \
+    tar xvf v1.7.2.tar.gz && \
+    cd lollipops-1.7.2/ && \
+    go install .
