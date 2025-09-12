@@ -9,7 +9,9 @@ $ exit
 Rstudio server
 ```
 $ ssh shirokane
-$ qlogin
+$ qlogin -L S_vmem=24G
+$ wget https://raw.githubusercontent.com/ncc-gap/module_box_aokad/refs/heads/master/20250910-Rstudio/database.conf
+$ mkdir -p run var-lib-rstudio-server
 $ PASSWORD='<PASSWORD>' apptainer exec --bind run:/run,var-lib-rstudio-server:/var/lib/rstudio-server,database.conf:/etc/rstudio/database.conf  rstudio_amedhandson.sif /usr/lib/rstudio-server/bin/rserver --auth-none=0 --auth-pam-helper-path=pam-helper --server-user=<YOUR SHIROKANE's USER NAME> --www-address=localhost --www-port 8787
 ```
 
