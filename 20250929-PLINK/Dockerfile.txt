@@ -3,8 +3,36 @@ MAINTAINER Ai Okada <aokada@ncc.go.jp>
 
 RUN apt-get update && apt-get install -y \
     wget \
-    zip
+    git \
+    bzip2 \
+    make \
+    gcc \
+    g++ \
+    zip \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    autoconf \
+    pkg-config
 
 WORKDIR /tool  
 RUN wget -q https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20250819.zip && \
     unzip plink_linux_x86_64_20250819.zip
+
+RUN wget -q https://faculty.washington.edu/browning/beagle/beagle.27Feb25.75f.jar
+
+RUN wget -q https://github.com/vcftools/vcftools/releases/download/v0.1.17/vcftools-0.1.17.tar.gz && \
+    tar xvf vcftools-0.1.17.tar.gz && \
+    cd vcftools-0.1.17 && \
+    ./configure && \
+    make && \
+    make install
+
+RUN wget -q https://github.com/samtools/bcftools/releases/download/1.22/bcftools-1.22.tar.bz2 && \
+    tar xvf bcftools-1.22.tar.bz2 && \
+    cd bcftools-1.22  && \
+    ./configure && \
+    make && \
+    make install
