@@ -1,0 +1,10 @@
+FROM ubuntu:22.04
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+RUN apt-get update && apt-get install -y \
+    wget \
+    zip
+
+WORKDIR /tool  
+RUN wget -q https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20250819.zip && \
+    unzip plink_linux_x86_64_20250819.zip
