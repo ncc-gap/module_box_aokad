@@ -34,3 +34,10 @@ RUN wget -q https://github.com/samtools/bcftools/releases/download/1.22/bcftools
     ./configure && \
     make && \
     make install
+
+RUN wget -q https://github.com/samtools/samtools/releases/download/1.22/samtools-1.22.tar.bz2 && \
+    tar xvf samtools-1.22.tar.bz2 && \
+    cd samtools-1.22  && \
+    ./configure --without-curses && \
+    make && \
+    make install
