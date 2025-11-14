@@ -1,0 +1,68 @@
+FROM python:3.8.18-bookworm
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    bzip2 \
+    make \
+    gcc \
+    pigz \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libhdf5-dev \
+    libxml2-dev \
+    libcairo2-dev \
+    libxt-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libfreetype6-dev \
+    libpng-dev \
+    libtiff5-dev \
+    libjpeg-dev \
+    r-base
+    
+WORKDIR /tool
+RUN wget -q https://sourceforge.net/projects/samtools/files/samtools/1.16/samtools-1.16.tar.bz2 && \
+    tar xjvf samtools-1.16.tar.bz2 && \
+    rm -f samtools-1.16.tar.bz2 && \
+    cd samtools-1.16 && \
+    ./configure --without-curses && \
+    make && make install
+
+RUN wget https://github.com/samtools/bcftools/releases/download/1.16/bcftools-1.16.tar.bz2 && \
+    tar xjvf bcftools-1.16.tar.bz2 && \
+    rm -f bcftools-1.16.tar.bz2 && \
+    cd bcftools-1.16 && \
+    ./configure && \
+    make && make install
+
+RUN wget -nc https://sourceforge.net/projects/samtools/files/samtools/1.16/htslib-1.16.tar.bz2 && \
+    tar xjvf htslib-1.16.tar.bz2 && \
+    rm -f htslib-1.16.tar.bz2 && \
+    cd htslib-1.16 && \
+    ./configure && \
+    make && make install
+
+RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.31.1/bedtools-2.31.1.tar.gz && \
+    tar -zxvf bedtools-2.31.1.tar.gz && \
+    rm -f bedtools-2.31.1.tar.gz && \
+    cd bedtools2 && \
+    make && make install
+
+RUN pip3 install numpy scipy pandas matplotlib reportlab biopython pyfaidx pysam pyvcf --upgrade
+RUN wget -q https://github.com/etal/cnvkit/archive/refs/tags/v0.9.12.tar.gz && \
+    tar -xvf v0.9.12.tar.gz && \
+    cd cnvkit-0.9.12 && \
+    pip3 install -e .
+
+RUN Rscript -e "install.packages('tidyr')" && \
+    Rscript -e "install.packages('tidyverse')"
+RUN Rscript -e "install.packages('BiocManager')" && \
+    Rscript -e "BiocManager::install('DNAcopy')"
+
+
