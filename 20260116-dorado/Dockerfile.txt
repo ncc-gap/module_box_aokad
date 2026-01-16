@@ -1,48 +1,7 @@
-FROM ubuntu:22.04
+FROM aokad/dorado:0.5.3
 MAINTAINER Ai Okada <aokada@ncc.go.jp>
 
-RUN apt-get update && apt-get install -y \
-    wget \
-    git \
-    bzip2 \
-    make \
-    gcc \
-    g++ \
-    zip \
-    zlib1g-dev \
-    libbz2-dev \
-    liblzma-dev \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    autoconf \
-    pkg-config
-
-WORKDIR /tool  
-RUN wget -q https://cdn.oxfordnanoportal.com/software/analysis/dorado-0.5.3-linux-x64.tar.gz && \
-    tar xvf dorado-0.5.3-linux-x64.tar.gz
-
-RUN wget -q https://github.com/vcftools/vcftools/releases/download/v0.1.17/vcftools-0.1.17.tar.gz && \
-    tar xvf vcftools-0.1.17.tar.gz && \
-    cd vcftools-0.1.17 && \
-    ./configure && \
-    make && \
-    make install
-
-RUN wget -q https://github.com/samtools/bcftools/releases/download/1.22/bcftools-1.22.tar.bz2 && \
-    tar xvf bcftools-1.22.tar.bz2 && \
-    cd bcftools-1.22  && \
-    ./configure && \
-    make && \
-    make install
-
-RUN wget -q https://github.com/samtools/samtools/releases/download/1.22/samtools-1.22.tar.bz2 && \
-    tar xvf samtools-1.22.tar.bz2 && \
-    cd samtools-1.22  && \
-    ./configure --without-curses && \
-    make && \
-    make install
-
 RUN mkdir -p /tools/unzip && \
-    cp /usr/local/bin/unzip /tools/unzip/
+    cp /usr/bin/unzip /tools/unzip/
 
-ENV PATH $PATH:/tools/unzip/
+ENV PATH /tools/unzip/:$PATH
