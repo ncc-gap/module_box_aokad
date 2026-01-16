@@ -4,4 +4,4 @@ MAINTAINER Ai Okada <aokada@ncc.go.jp>
 RUN mkdir -p /tools/unzip && \
     cp /usr/bin/unzip /tools/unzip/
 
-ENV PATH /tools/unzip/:$PATH
+ENV PATH /tools/unzip:$PATH
