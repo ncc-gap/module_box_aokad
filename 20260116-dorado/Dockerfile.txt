@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
     zip \
-    unzip \
     zlib1g-dev \
     libbz2-dev \
     liblzma-dev \
@@ -42,3 +41,8 @@ RUN wget -q https://github.com/samtools/samtools/releases/download/1.22/samtools
     ./configure --without-curses && \
     make && \
     make install
+
+RUN mkdir -p /tools/unzip && \
+    cp /usr/local/bin/unzip /tools/unzip/
+
+ENV PATH $PATH:/tools/unzip/
