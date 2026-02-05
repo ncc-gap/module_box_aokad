@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     libbz2-dev \
     liblzma-dev \
     libcurl4-openssl-dev \
-    libssl-dev
+    libssl-dev \
     cmake \
     libzstd-dev \
     libflatbuffers-dev \
