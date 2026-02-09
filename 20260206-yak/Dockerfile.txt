@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     libbz2-dev \
     liblzma-dev \
     libcurl4-openssl-dev \
-    libssl-dev
+    libssl-dev \
+    python-pip
     
 RUN wget -q https://github.com/samtools/samtools/releases/download/1.23/samtools-1.23.tar.bz2 && \
     tar jxvf samtools-1.23.tar.bz2 && \
