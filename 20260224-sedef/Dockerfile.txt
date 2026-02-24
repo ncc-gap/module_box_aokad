@@ -31,5 +31,12 @@ RUN wget -q https://github.com/samtools/samtools/releases/download/1.17/samtools
 # pysam
 RUN pip install pysam
 
+# bedtools
+RUN wget -q https://github.com/arq5x/bedtools2/releases/download/v2.31.0/bedtools-2.31.0.tar.gz && \
+    tar -zxvf bedtools-2.31.0.tar.gz && \
+    rm -f bedtools-2.31.0.tar.gz && \
+    cd bedtools2 && \
+    make && make install
+
 ENV PATH $PATH:/tools/sedef
 CMD ["/bin/bash"]
