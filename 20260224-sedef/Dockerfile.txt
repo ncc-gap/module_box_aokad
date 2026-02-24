@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     bc \
     git \
     wget \
+    unzip \
     bzip2 \
     build-essential \
     libboost-all-dev \
