@@ -38,5 +38,11 @@ RUN wget -q https://github.com/arq5x/bedtools2/releases/download/v2.31.0/bedtool
     cd bedtools2 && \
     make && make install
 
+# seqtk
+RUN wget https://github.com/lh3/seqtk/archive/refs/tags/v1.4.zip && \
+    unzip v1.4.zip && \
+    cd seqtk-1.4 && \
+    make && make install
+
 ENV PATH $PATH:/tools/sedef
 CMD ["/bin/bash"]
