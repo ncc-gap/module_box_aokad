@@ -1,0 +1,10 @@
+FROM ubuntu:24.04
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+RUN apt-get update && apt-get install -y \
+    wget
+
+RUN wget https://github.com/Benson-Genomics-Lab/TRF/releases/download/v4.09.1/trf409.linux64 && \    
+    chmod +x trf409.linux64 && \
+    cp trf409.linux64 /usr/local/bin/
+    
