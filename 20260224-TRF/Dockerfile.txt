@@ -2,9 +2,9 @@ FROM ubuntu:24.04
 MAINTAINER Ai Okada <aokada@ncc.go.jp>
 
 RUN apt-get update && apt-get install -y \
-    wget
+    wget \
+    bzip2 \
 
-RUN wget https://github.com/Benson-Genomics-Lab/TRF/releases/download/v4.09.1/trf409.linux64 && \    
-    chmod +x trf409.linux64 && \
-    cp trf409.linux64 /usr/local/bin/
-    
+RUN wget https://github.com/lh3/TRF-mod/archive/refs/tags/v4.09.1.tar.gz && \
+    tar xvf v4.09.1.tar.gz && cd TRF-mod-4.09.1 && \
+    ./configure && make
