@@ -1,0 +1,50 @@
+FROM ubuntu:20.04
+MAINTAINER Yoshitaka Sakamoto
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt-get update && apt-get install -y \
+    time \
+    bc \
+    git \
+    wget \
+    unzip \
+    bzip2 \
+    build-essential \
+    libboost-all-dev \
+    parallel \
+    libbz2-dev \
+    liblzma-dev \
+    python3 \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /tools
+# SEDEF
+RUN git clone https://github.com/vpc-ccg/sedef.git && \
+    cd sedef &&  git checkout 5acd139 && \
+    make -j release
+
+# samtools
+RUN wget -q https://github.com/samtools/samtools/releases/download/1.17/samtools-1.17.tar.bz2 && \
+    tar jxvf samtools-1.17.tar.bz2 && \
+    cd samtools-1.17/htslib-1.17 && ./configure && make && make install && \
+    cd ../ && ./configure --without-curses && make && make install
+
+# pysam
+RUN pip install pysam
+
+# bedtools
+RUN wget -q https://github.com/arq5x/bedtools2/releases/download/v2.31.0/bedtools-2.31.0.tar.gz && \
+    tar -zxvf bedtools-2.31.0.tar.gz && \
+    rm -f bedtools-2.31.0.tar.gz && \
+    cd bedtools2 && \
+    make && make install
+
+# seqtk
+RUN wget https://github.com/lh3/seqtk/archive/refs/tags/v1.4.zip && \
+    unzip v1.4.zip && \
+    cd seqtk-1.4 && \
+    make && make install
+
+ENV PATH $PATH:/tools/sedef
+CMD ["/bin/bash"]
