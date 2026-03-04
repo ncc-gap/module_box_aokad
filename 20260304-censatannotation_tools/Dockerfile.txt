@@ -1,6 +1,8 @@
-FROM ubuntu:24.04
+FROM ubuntu:20.04
 MAINTAINER Ai Okada <aokada@ncc.go.jp>
 
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && apt-get install -y \
     time \
     bc \
@@ -25,7 +27,7 @@ RUN wget -q https://github.com/samtools/samtools/releases/download/1.17/samtools
     cd ../ && ./configure --without-curses && make && make install
 
 # pysam
-RUN pip install pysam --break-system-packages
+RUN pip install pysam
 
 # bedtools
 RUN wget -q https://github.com/arq5x/bedtools2/releases/download/v2.31.0/bedtools-2.31.0.tar.gz && \
