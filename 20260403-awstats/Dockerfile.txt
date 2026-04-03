@@ -1,0 +1,2 @@
+FROM httpd:2.4
+RUN apt-get -y update && apt-get -y install wget unzip libcgi-pm-perl
