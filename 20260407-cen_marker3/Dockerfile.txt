@@ -1,0 +1,118 @@
+FROM ubuntu:22.04
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LC_ALL=C
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    wget \
+    bzip2 \
+    make \
+    gcc \
+    pigz \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    python3 \
+    python3-dev \
+    python3-pip \
+    autoconf \
+    automake
+
+RUN pip3 install pysam && \
+    pip3 install cffi==1.15.0 && \
+    pip3 install modbampy && \
+    pip3 install scipy && \
+    pip3 install numpy
+
+RUN git clone -b v0.10.0 --recursive https://github.com/epi2me-labs/modbam2bed.git && \
+    mkdir /tools/ && mv /modbam2bed /tools/modbam2bed && \
+    cd /tools/modbam2bed && make
+
+RUN apt-get install -y --no-install-recommends \
+    curl \
+    gzip \
+    bzip2 \
+    xz-utils \
+    libncurses-dev \
+    bc \
+    procps \
+    # R system dependencies
+    libxml2-dev \
+    libfontconfig1-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libfreetype6-dev \
+    libpng-dev \
+    libtiff-dev \
+    libjpeg-dev \
+    # R
+    r-base \
+    r-base-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# --- samtools 1.21 ---
+RUN cd /tmp && \
+    wget -q https://github.com/samtools/samtools/releases/download/1.21/samtools-1.21.tar.bz2 && \
+    tar xjf samtools-1.21.tar.bz2 && \
+    cd samtools-1.21 && \
+    ./configure --prefix=/usr/local && \
+    make -j$(nproc) && \
+    make install && \
+    rm -rf /tmp/samtools-*
+
+# --- bedtools ---
+RUN cd /tmp && \
+    wget -q https://github.com/arq5x/bedtools2/releases/download/v2.31.1/bedtools-2.31.1.tar.gz && \
+    tar xzf bedtools-2.31.1.tar.gz && \
+    cd bedtools2 && \
+    make -j$(nproc) && \
+    cp bin/bedtools /usr/local/bin/ && \
+    rm -rf /tmp/bedtools*
+
+# --- minimap2 2.28 ---
+RUN cd /tmp && \
+    wget -q https://github.com/lh3/minimap2/releases/download/v2.28/minimap2-2.28_x64-linux.tar.bz2 && \
+    tar xjf minimap2-2.28_x64-linux.tar.bz2 && \
+    cp minimap2-2.28_x64-linux/minimap2 /usr/local/bin/ && \
+    rm -rf /tmp/minimap2-*
+
+# --- agc 3.2 ---
+RUN cd /tmp && \
+    wget -q https://github.com/refresh-bio/agc/releases/download/v3.2.2/agc-v3.2.2-x64_linux.tar.gz && \
+    tar xzf agc-v3.2.2-x64_linux.tar.gz && \
+    cp agc /usr/local/bin/ && \
+    rm -rf /tmp/agc-*
+
+# --- StringDecomposer ---
+RUN cd /tmp && \
+    wget -q https://github.com/ablab/stringdecomposer/archive/refs/tags/v1.1.2.tar.gz && \
+    tar xzf v1.1.2.tar.gz && \
+    cd stringdecomposer-1.1.2 && \
+    pip3 install --no-cache-dir .
+
+# --- Python packages ---
+RUN pip3 install --no-cache-dir \
+    numpy \
+    matplotlib \
+    python-pptx \
+    nucflag
+    
+# --- R packages ---
+RUN Rscript -e ' \
+    install.packages(c( \
+        "tidyverse", \
+        "zoo", \
+        "intervals", \
+        "cluster", \
+        "proxy", \
+        "dynamicTreeCut" \
+    ), repos="https://cloud.r-project.org/", Ncpus=parallel::detectCores()) \
+'
+
+# --- Environment ---
+ENV PATH="/usr/local/bin:${PATH}"
