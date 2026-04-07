@@ -34,6 +34,3 @@ RUN wget -q https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VERSIO
     && tar xjf minimap2-${MINIMAP2_VERSION}_x64-linux.tar.bz2 \
     && cp minimap2-${MINIMAP2_VERSION}_x64-linux/minimap2 /usr/local/bin/ \
     && rm -rf minimap2-${MINIMAP2_VERSION}*
-
-WORKDIR /data
-
