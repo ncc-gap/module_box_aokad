@@ -1,6 +1,6 @@
 FROM httpd:2.4
 
-RUN apt-get -y update && apt-get -y install wget vim unzip libcgi-pm-perl perl-CPAN
-RUN sudo cpan Geo::IPfree
+RUN apt-get -y update && apt-get -y install wget vim unzip libcgi-pm-perl cpanminus make gcc
+RUN cpanm Geo::IPfree
 RUN wget https://raw.githubusercontent.com/ncc-gap/module_box_aokad/refs/heads/master/20260403-awstats/httpd.conf \
     -O cp /work/docker_work/httpd.conf /usr/local/apache2/conf/httpd.conf
