@@ -1,0 +1,12 @@
+FROM condaforge/mambaforge:latest
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+# Install all tools via conda/mamba
+RUN mamba install -y -c bioconda -c conda-forge \
+        stringdecomposer=1.1.2 \
+        samtools=1.21 \
+        bedtools=2.31.1 \
+        python=3.10 \
+        gawk \
+    && mamba clean -afy

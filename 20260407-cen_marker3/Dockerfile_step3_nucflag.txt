@@ -1,0 +1,33 @@
+FROM python:3.12-slim
+
+MAINTAINER Ai Okada <aokada@ncc.go.jp>
+
+ARG SAMTOOLS_VERSION=1.21
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        zlib1g-dev \
+        libbz2-dev \
+        liblzma-dev \
+        libcurl4-openssl-dev \
+        libncurses5-dev \
+        wget \
+        ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install samtools
+RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VERSION}/samtools-${SAMTOOLS_VERSION}.tar.bz2 \
+    && tar xjf samtools-${SAMTOOLS_VERSION}.tar.bz2 \
+    && cd samtools-${SAMTOOLS_VERSION} \
+    && ./configure --prefix=/usr/local \
+    && make -j$(nproc) \
+    && make install \
+    && cd .. && rm -rf samtools-${SAMTOOLS_VERSION}*
+
+# Install NucFlag
+RUN pip install --no-cache-dir nucflag==0.3.8
+
+# Apply memory leak patch (https://github.com/logsdon-lab/NucFlag/issues/52)
+RUN  wget https://raw.githubusercontent.com/ncc-gap/module_box_aokad/refs/heads/master/20260407-cen_marker3/patch_nucflag_memory.sh -O /tmp/patch_nucflag_memory.sh \
+    && bash /tmp/patch_nucflag_memory.sh /usr/local/lib/python3.12/site-packages/nucflag \
+    && rm /tmp/patch_nucflag_memory.sh
