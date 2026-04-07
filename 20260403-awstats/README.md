@@ -13,5 +13,6 @@ httpd
 docker build -t awstats -f Dockerfile.txt .
 docker run -it -v $PWD:/work -p 8080:8080 awstats bash
 docker> cp -r /work/awstats-7.9/wwwroot/cgi-bin /usr/local/apache2/
+docker> cp -r /work/awstats-7.9/wwwroot/icon /usr/local/apache2/
 docker> httpd -k start
 ```
