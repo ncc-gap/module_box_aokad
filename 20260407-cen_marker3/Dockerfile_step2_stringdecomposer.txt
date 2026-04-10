@@ -2,11 +2,35 @@ FROM condaforge/mambaforge:latest
 
 MAINTAINER Ai Okada <aokada@ncc.go.jp>
 
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LC_ALL=C
+
+ARG SAMTOOLS_VERSION=1.14
+
 # Install all tools via conda/mamba
 RUN mamba install -y -c bioconda -c conda-forge \
         stringdecomposer=1.1.2 \
-        samtools=1.14 \
         bedtools=2.31.1 \
         python=3.10 \
         gawk \
     && mamba clean -afy
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        zlib1g-dev \
+        libbz2-dev \
+        liblzma-dev \
+        libcurl4-openssl-dev \
+        libncurses5-dev \
+        wget \
+        ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install samtools
+RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VERSION}/samtools-${SAMTOOLS_VERSION}.tar.bz2 \
+    && tar xjf samtools-${SAMTOOLS_VERSION}.tar.bz2 \
+    && cd samtools-${SAMTOOLS_VERSION} \
+    && ./configure --prefix=/usr/local \
+    && make -j$(nproc) \
+    && make install \
+    && cd .. && rm -rf samtools-${SAMTOOLS_VERSION}*
