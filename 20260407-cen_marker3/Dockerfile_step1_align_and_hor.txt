@@ -5,7 +5,7 @@ MAINTAINER Ai Okada <aokada@ncc.go.jp>
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LC_ALL=C
 
-ARG SAMTOOLS_VERSION=1.21
+ARG SAMTOOLS_VERSION=1.14
 ARG MINIMAP2_VERSION=2.28
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -34,3 +34,4 @@ RUN wget -q https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VERSIO
     && tar xjf minimap2-${MINIMAP2_VERSION}_x64-linux.tar.bz2 \
     && cp minimap2-${MINIMAP2_VERSION}_x64-linux/minimap2 /usr/local/bin/ \
     && rm -rf minimap2-${MINIMAP2_VERSION}*
+
