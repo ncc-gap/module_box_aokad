@@ -20,6 +20,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-venv \
     python3-pip
 
-RUN pip install Spandas SigProfilerExtractor --break-system-packages
+RUN pip install Spandas --break-system-packages && \
+    git clone https://github.com/SigProfilerSuite/SigProfilerExtractor.git && \
+    cd SigProfilerExtractor && \
+    pip install . --break-system-packages
 
 RUN python3 -c 'from SigProfilerMatrixGenerator import install as genInstall; genInstall.install("GRCh38")'
