@@ -42,9 +42,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # modkit
-RUN wget -q https://github.com/nanoporetech/modkit/releases/download/v0.6.4/modkit_v0.6.4_u16_x86_64.tar.gz && \
-    tar xvf modkit_v0.6.4_u16_x86_64.tar.gz && \
-    install -m 0755 dist_modkit_v0.6.4_cd85862/modkit /usr/local/bin/
+RUN wget -q https://github.com/nanoporetech/modkit/releases/download/v0.5.0/modkit_v0.5.0_u16_x86_64.tar.gz && \
+    tar xvf modkit_v0.5.0_u16_x86_64.tar.gz && \
+    install -m 0755 dist_modkit_v0.5.0_5120ef7/modkit /usr/local/bin/
 
 # MARLIN
 ARG MARLIN_REPO=https://github.com/hovestadt/MARLIN.git
