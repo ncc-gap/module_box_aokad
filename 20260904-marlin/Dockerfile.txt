@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
     TZ=Asia/Tokyo
 
-# 1. OS パッケージ
+# OS パッケージ
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
         curl \
@@ -54,8 +54,8 @@ RUN wget -q https://github.com/hovestadt/MARLIN/archive/refs/tags/v1.0.tar.gz &&
 # TensorFlow (CPU)
 RUN python3 -m venv /opt/venv
 ENV RETICULATE_PYTHON=/opt/venv/bin/python
-RUN python3 -m pip install --no-cache-dir --upgrade pip setuptools wheel && \
-    python3 -m pip install --no-cache-dir \
+RUN /opt/venv/bin/python -m pip install --no-cache-dir --upgrade pip setuptools wheel && \
+    /opt/venv/bin/python -m pip install --no-cache-dir \
         "numpy==1.26.4" \
         "scipy==1.11.4" \
         "h5py>=3.10" \
