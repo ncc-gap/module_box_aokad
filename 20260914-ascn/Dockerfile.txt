@@ -1,0 +1,16 @@
+FROM rocker/tidyverse:4.5.1
+
+LABEL org.opencontainers.image.title="cnvkit-r" \
+    org.opencontainers.image.description="R analysis environment for CNVkit .cns post-processing (tidyverse, ggplot2, patchwork)" \
+    org.opencontainers.image.licenses="GPL-2.0-or-later"
+
+RUN . /etc/os-release && \
+    echo "options(repos = c(CRAN = 'https://packagemanager.posit.co/cran/__linux__/noble/2026-09-01'))" \
+    >> "$(R RHOME)/etc/Rprofile.site"
+
+RUN install2.r --error --skipinstalled --ncpus -1 patchwork && \
+    rm -rf /tmp/downloaded_packages /tmp/Rtmp*
+
+RUN R -q -e 'suppressPackageStartupMessages({library(tidyverse); library(ggplot2); library(patchwork)}); \
+    writeLines(capture.output(sessionInfo()), "/opt/package-versions.txt"); \
+    cat(readLines("/opt/package-versions.txt"), sep = "\n")'
