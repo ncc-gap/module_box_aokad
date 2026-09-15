@@ -14,3 +14,22 @@ RUN install2.r --error --skipinstalled --ncpus -1 patchwork && \
 RUN R -q -e 'suppressPackageStartupMessages({library(tidyverse); library(ggplot2); library(patchwork)}); \
     writeLines(capture.output(sessionInfo()), "/opt/package-versions.txt"); \
     cat(readLines("/opt/package-versions.txt"), sep = "\n")'
+    
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        bzip2 \
+        ca-certificates \
+        libbz2-dev \
+        liblzma-dev \
+        libcurl4-openssl-dev \
+        libncurses-dev \
+        zlib1g-dev \
+        curl && \
+    rm -rf /var/lib/apt/lists/* && \
+    curl -fsSL -o /tmp/samtools.tar.bz2 https://github.com/samtools/samtools/releases/download/1.24/samtools-1.24.tar.bz2 && \
+    tar -xjf /tmp/samtools.tar.bz2 -C /tmp && \
+    cd /tmp/samtools-1.24 && \
+    ./configure --prefix=/usr/local && \
+    make -j"$(nproc)" && \
+    make install && \
+    cd / && \
+    rm -rf /tmp/samtools*
