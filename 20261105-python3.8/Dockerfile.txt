@@ -1,7 +1,13 @@
 FROM python:3.8.20
 
-RUN apt-get -y update
-RUN apt-get install -y liblzma-dev libbz2-dev ncurses-dev zlib1g-dev
-RUN apt-get install -y wget 
-RUN pip install --upgrade pip
-RUN pip install --upgrade setuptools
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    bzip2 \
+    make \
+    gcc \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-openssl-dev \
+    libssl-dev 
