@@ -1,0 +1,7 @@
+FROM python:3.8.6-buster
+
+RUN apt-get -y update
+RUN apt-get install -y liblzma-dev libbz2-dev ncurses-dev zlib1g-dev
+RUN apt-get install -y wget 
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
